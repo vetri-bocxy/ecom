@@ -1,0 +1,14 @@
+package com.bocxy.ecom.DTO;
+
+import lombok.Data;
+
+@Data
+public class LoginRequestDTO {
+
+
+	private String username;
+	private String password;
+    private String encData;
+
+
+}
