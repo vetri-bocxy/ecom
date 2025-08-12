@@ -48,7 +48,9 @@ public class EcomProductMapper {
                 .orElseThrow(() -> new RuntimeException("User Not found " + dto.getUserId()));
 
         EcomProduct product = new EcomProduct();
-        product.setProductId(dto.getProductId());
+        if(dto.getProductId()!=null){
+            product.setProductId(dto.getProductId());
+        }
         product.setProjectName(dto.getProjectName());
         product.setProductName(dto.getProductName());
         product.setProductCategory(dto.getProductCategory());

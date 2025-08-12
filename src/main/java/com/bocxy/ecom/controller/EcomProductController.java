@@ -23,6 +23,10 @@ public class EcomProductController {
     public ResponseEntity<EcomProductDTO> create(@RequestBody EcomProductCreateDTO createDTO) {
         return ResponseEntity.ok(apiService.create(createDTO));
     }
+    @PostMapping("/create")
+    public ResponseEntity<EcomProductDTO> create1(@RequestBody EcomProductCreateDTO createDTO) {
+        return ResponseEntity.ok(apiService.create(createDTO));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<EcomProductDTO> getById(@PathVariable Long id) {
@@ -49,5 +53,12 @@ public class EcomProductController {
         apiService.delete(id);
         return ResponseEntity.ok("Product deleted successfully");
     }
+
+    @GetMapping("/getAllByUserIdAndProjectName")
+    public ResponseEntity<List<EcomProductDTO>> getByUserId(@RequestParam Long id,@RequestParam String projectName) {
+        return ResponseEntity.ok(apiService.getAll(id,projectName));
+    }
+
+
 
 }

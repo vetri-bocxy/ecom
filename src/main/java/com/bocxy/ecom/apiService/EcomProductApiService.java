@@ -24,9 +24,13 @@ public class EcomProductApiService {
     }
 
     public EcomProductDTO create(EcomProductCreateDTO createDTO) {
-        if (productService.existsByProductId(createDTO.getProductId())) {
-            throw new RuntimeException("Product with this ID already exists");
+        System.out.println(createDTO.getProductId());
+        if(createDTO.getProductId()!=null){
+            if (productService.existsByProductId(createDTO.getProductId())) {
+                throw new RuntimeException("Product with this ID already exists");
+            }
         }
+
         EcomProduct saved = productService.save(productMapper.toEntity(createDTO));
         return productMapper.toDTO(saved);
     }
@@ -61,5 +65,12 @@ public class EcomProductApiService {
                         .map(productMapper::toDTO)
                         .collect(Collectors.toList()))
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public List<EcomProductDTO> getAll(Long id, String projectName) {
+        return productService.getAllByUserIdAndProjectName(id,projectName)
+                .stream()
+                .map(productMapper::toDTO)
+                .toList();
     }
 }

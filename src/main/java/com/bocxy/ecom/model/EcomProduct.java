@@ -22,9 +22,9 @@ public class EcomProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = true)
     private String productId;
-    @Column(unique=true,nullable = false)
+    @Column(nullable = false)
     private String projectName;
     @NotNull
     @Size(max = 100)
