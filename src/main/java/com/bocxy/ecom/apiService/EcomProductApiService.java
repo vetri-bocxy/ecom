@@ -81,14 +81,11 @@ public class EcomProductApiService {
         return dto;
     }
 
-<<<<<<< HEAD
 
-=======
     public List<EcomProductDTO> getAllByProjectName(String projectName) {
         return productService.getAllByProjectName(projectName)
                 .stream()
                 .map(productMapper::toDTO)
                 .toList();
     }
->>>>>>> 282f0a73bff82ac3fa869754f73ccbb40d90497b
 }

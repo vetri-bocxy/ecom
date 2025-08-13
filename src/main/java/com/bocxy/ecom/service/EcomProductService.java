@@ -5,6 +5,7 @@ import com.bocxy.ecom.repository.EcomProductRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,17 +53,15 @@ public class EcomProductService {
         return repository.findAll();
     }
 
-<<<<<<< HEAD
     public List<String> getDistinctProductCategories() {
         return repository.findDistinctProductCategoriesAndStatus("approved");
     }
 
     public List<String> getDistinctProductBrand() {
         return repository.findDistinctProductBrandsAndStatus("approved");
-=======
+    }
 
     public List<EcomProduct> getAllByProjectName(String projectName) {
         return repository.findByProjectName(projectName);
->>>>>>> 282f0a73bff82ac3fa869754f73ccbb40d90497b
     }
 }
