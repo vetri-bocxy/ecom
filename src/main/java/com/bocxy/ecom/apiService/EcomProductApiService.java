@@ -25,7 +25,6 @@ public class EcomProductApiService {
     }
 
     public EcomProductDTO create(EcomProductCreateDTO createDTO) {
-        System.out.println(createDTO.getProductId());
         if(createDTO.getProductId()!=null){
             if (productService.existsByProductId(createDTO.getProductId())) {
                 throw new RuntimeException("Product with this ID already exists");

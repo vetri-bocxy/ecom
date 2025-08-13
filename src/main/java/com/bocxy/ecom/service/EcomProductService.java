@@ -2,8 +2,6 @@ package com.bocxy.ecom.service;
 
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.repository.EcomProductRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,8 +11,6 @@ import java.util.Optional;
 @Transactional
 @Service
 public class EcomProductService {
-    private static final Logger log = LogManager.getLogger(EcomProductService.class);
-
 
     private final EcomProductRepository repository;
 
@@ -27,7 +23,6 @@ public class EcomProductService {
     }
 
     public EcomProduct save(EcomProduct product) {
-        log.info("logger works!");
         return repository.save(product);
     }
 
