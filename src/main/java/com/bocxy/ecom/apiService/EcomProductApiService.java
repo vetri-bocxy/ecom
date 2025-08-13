@@ -77,9 +77,10 @@ public class EcomProductApiService {
 
     public ProductBrandsAndCategoriesDTO getAllProductBrandsAndCategories() {
         ProductBrandsAndCategoriesDTO dto=new ProductBrandsAndCategoriesDTO();
-        List<EcomProduct> entity=productService.getAll();
-        dto.setProductCategory(entity.stream().map(EcomProduct::getProductCategory).toList());
-        dto.setProductBrand(entity.stream().map(EcomProduct::getProductBrand).toList());
+        dto.setProductCategory(productService.getDistinctProductCategories());
+        dto.setProductBrand(productService.getDistinctProductBrand());
         return dto;
     }
+
+
 }

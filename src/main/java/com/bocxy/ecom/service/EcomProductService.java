@@ -58,4 +58,12 @@ public class EcomProductService {
     public List<EcomProduct> getAll() {
         return repository.findAll();
     }
+
+    public List<String> getDistinctProductCategories() {
+        return repository.findDistinctProductCategoriesAndStatus("approved");
+    }
+
+    public List<String> getDistinctProductBrand() {
+        return repository.findDistinctProductBrandsAndStatus("approved");
+    }
 }
