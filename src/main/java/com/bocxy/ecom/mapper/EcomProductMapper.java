@@ -44,13 +44,14 @@ public class EcomProductMapper {
 
     public EcomProduct toEntity(EcomProductCreateDTO dto) {
 
-        User user=userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User Not found " + dto.getUserId()));
-
         EcomProduct product = new EcomProduct();
-        if(dto.getProductId()!=null){
+
+        // Set productId if present
+        if (dto.getProductId() != null) {
             product.setProductId(dto.getProductId());
         }
+
+        // Map all fields
         product.setProjectName(dto.getProjectName());
         product.setProductName(dto.getProductName());
         product.setProductCategory(dto.getProductCategory());
@@ -67,9 +68,16 @@ public class EcomProductMapper {
         product.setGender(dto.getGender());
         product.setProductBrand(dto.getProductBrand());
         product.setProductImageUrl(dto.getProductImageUrl());
-        product.setUser(user);
         product.setStoreId(dto.getStoreId());
         product.setStatus("pending");
+
+        // Only fetch and set user if userId is provided
+        if (dto.getUserId() != null) {
+            userRepository.findById(dto.getUserId())
+                    .ifPresent(product::setUser);
+        }
+
         return product;
     }
+
 }
