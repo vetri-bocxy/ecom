@@ -82,4 +82,11 @@ public class EcomProductApiService {
         dto.setProductBrand(entity.stream().map(EcomProduct::getProductBrand).toList());
         return dto;
     }
+
+    public List<EcomProductDTO> getAllByProjectName(String projectName) {
+        return productService.getAllByProjectName(projectName)
+                .stream()
+                .map(productMapper::toDTO)
+                .toList();
+    }
 }

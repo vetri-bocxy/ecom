@@ -60,6 +60,11 @@ public class EcomProductController {
         return ResponseEntity.ok(apiService.getAll(id,projectName));
     }
 
+    @GetMapping("/getAllByProjectName")
+    public ResponseEntity<List<EcomProductDTO>> getAllByProjectName(@RequestParam String projectName) {
+        return ResponseEntity.ok(apiService.getAllByProjectName(projectName));
+    }
+
     @GetMapping("/getAllProductBrandsAndCategories")
     public ResponseEntity<ProductBrandsAndCategoriesDTO> getAllBrandsAndCategories(){
         return ResponseEntity.ok(apiService.getAllProductBrandsAndCategories());

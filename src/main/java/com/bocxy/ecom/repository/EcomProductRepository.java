@@ -1,5 +1,6 @@
 package com.bocxy.ecom.repository;
 
+import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.model.EcomProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +25,7 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
 
     @Query("SELECT e FROM EcomProduct e WHERE e.user.id = :id AND e.projectName = :projectName")
     List<EcomProduct> findByUserIdAndProjectName(Long id, String projectName);
+
+    @Query("SELECT e FROM EcomProduct e WHERE e.projectName = :projectName")
+    List<EcomProduct> findByProjectName(String projectName);
 }

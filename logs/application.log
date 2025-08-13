@@ -3589,3 +3589,31 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'aesthetic' f
 2025-08-13 12:10:41 [http-nio-8089-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-08-13 12:10:41 [http-nio-8089-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2025-08-13 12:10:41 [http-nio-8089-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-08-13 12:32:20 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13 12:32:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-13 12:32:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-13 12:32:27 [restartedMain] INFO  com.bocxy.ecom.ECom - Starting ECom using Java 18.0.2 on AWSBocxy with PID 15488 (C:\Users\vimal\Documents\GitHub\ecom\target\classes started by vimal in C:\Users\vimal\Documents\GitHub\ecom)
+2025-08-13 12:32:27 [restartedMain] INFO  com.bocxy.ecom.ECom - No active profile set, falling back to 1 default profile: "default"
+2025-08-13 12:32:27 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-13 12:32:27 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-13 12:32:28 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-13 12:32:28 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 96 ms. Found 6 JPA repository interfaces.
+2025-08-13 12:32:29 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8089 (http)
+2025-08-13 12:32:29 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8089"]
+2025-08-13 12:32:29 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-13 12:32:29 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.76]
+2025-08-13 12:32:29 [restartedMain] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-13 12:32:29 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2422 ms
+2025-08-13 12:32:30 [restartedMain] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-13 12:32:30 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-08-13 12:32:30 [restartedMain] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-08-13 12:32:30 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-13 12:32:30 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-13 12:32:31 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-08-13 12:32:32 [restartedMain] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-13 12:32:32 [restartedMain] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13 12:32:33 [restartedMain] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@39227a64, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19791849, org.springframework.security.web.context.SecurityContextPersistenceFilter@2054f58a, org.springframework.security.web.header.HeaderWriterFilter@5439002a, org.springframework.security.web.authentication.logout.LogoutFilter@2132720, com.bocxy.ecom.jwt.JwtRequestFilter@160ae4d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@493267b9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3059e790, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@71c7b724, org.springframework.security.web.session.SessionManagementFilter@1eb9fa00, org.springframework.security.web.access.ExceptionTranslationFilter@614e1b62, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@507cb529]
+2025-08-13 12:32:34 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-13 12:32:34 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8089"]
+2025-08-13 12:32:34 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8089 (http) with context path ''
+2025-08-13 12:32:34 [restartedMain] INFO  com.bocxy.ecom.ECom - Started ECom in 8.113 seconds (JVM running for 9.338)
