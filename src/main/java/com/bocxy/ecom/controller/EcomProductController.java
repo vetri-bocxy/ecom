@@ -2,6 +2,7 @@ package com.bocxy.ecom.controller;
 
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
+import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
 import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
 import com.bocxy.ecom.apiService.EcomProductApiService;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
@@ -68,5 +69,10 @@ public class EcomProductController {
     @GetMapping("/getAllProductBrandsAndCategories")
     public ResponseEntity<ProductBrandsAndCategoriesDTO> getAllBrandsAndCategories(){
         return ResponseEntity.ok(apiService.getAllProductBrandsAndCategories());
+    }
+
+    @GetMapping("getEcomProductStatusWise")
+    public ResponseEntity<EcomProductStatusWiseDto> getEcomProductStatusWise() {
+        return ResponseEntity.ok(apiService.getEcomProductStatusWise());
     }
 }

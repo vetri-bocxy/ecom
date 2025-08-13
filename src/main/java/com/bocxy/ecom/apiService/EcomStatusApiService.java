@@ -1,6 +1,7 @@
 package com.bocxy.ecom.apiService;
 
 
+import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
 import com.bocxy.ecom.createDTO.EcomStatusDTO;
 import com.bocxy.ecom.mapper.EcomStatusMapper;
 import com.bocxy.ecom.model.EcomProduct;

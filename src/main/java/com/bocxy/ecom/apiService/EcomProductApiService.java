@@ -2,6 +2,7 @@ package com.bocxy.ecom.apiService;
 
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
+import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
 import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
@@ -97,5 +98,14 @@ public class EcomProductApiService {
                 .stream()
                 .map(productMapper::toDTO)
                 .toList();
+    }
+
+    public EcomProductStatusWiseDto getEcomProductStatusWise() {
+        EcomProductStatusWiseDto dto=new EcomProductStatusWiseDto();
+        dto.setPending(productService.getByEcomProductStatus("pending").stream().map(productMapper::toDTO).toList());
+        dto.setApproved(productService.getByEcomProductStatus("approved").stream().map(productMapper::toDTO).toList());
+        dto.setRejected(productService.getByEcomProductStatus("rejected").stream().map(productMapper::toDTO).toList());
+        return dto;
+
     }
 }

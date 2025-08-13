@@ -1,6 +1,8 @@
 package com.bocxy.ecom.service;
 
 
+import com.bocxy.ecom.DTO.EcomProductDTO;
+import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.repository.EcomProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

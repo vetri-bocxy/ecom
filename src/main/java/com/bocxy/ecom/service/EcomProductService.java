@@ -1,5 +1,6 @@
 package com.bocxy.ecom.service;
 
+import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
 import com.bocxy.ecom.repository.EcomProductQuantityRepository;
@@ -68,5 +69,9 @@ public class EcomProductService {
 
     public void saveQty(EcomProductQuantity qtyEntity) {
         quantityRepository.save(qtyEntity);
+    }
+
+    public List<EcomProduct> getByEcomProductStatus(String status) {
+        return repository.findByStatus(status);
     }
 }
