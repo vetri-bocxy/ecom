@@ -61,8 +61,8 @@ public class EcomProductController {
     }
 
     @GetMapping("/getAllByProjectName")
-    public ResponseEntity<List<EcomProductDTO>> getAllByProjectName(@RequestParam String projectName) {
-        return ResponseEntity.ok(apiService.getAllByProjectName(projectName));
+    public ResponseEntity<List<EcomProductDTO>> getAllByProjectName(@RequestParam String projectName,@RequestParam String storeId) {
+        return ResponseEntity.ok(apiService.getAllByProjectName(projectName,storeId));
     }
 
     @GetMapping("/getAllProductBrandsAndCategories")

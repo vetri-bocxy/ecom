@@ -61,7 +61,7 @@ public class EcomProductService {
         return repository.findDistinctProductBrandsAndStatus("approved");
     }
 
-    public List<EcomProduct> getAllByProjectName(String projectName) {
-        return repository.findByProjectName(projectName);
+    public List<EcomProduct> getAllByProjectName(String projectName,String storeId) {
+        return repository.findByProjectName(projectName,storeId);
     }
 }

@@ -82,8 +82,8 @@ public class EcomProductApiService {
     }
 
 
-    public List<EcomProductDTO> getAllByProjectName(String projectName) {
-        return productService.getAllByProjectName(projectName)
+    public List<EcomProductDTO> getAllByProjectName(String projectName,String storeId) {
+        return productService.getAllByProjectName(projectName,storeId)
                 .stream()
                 .map(productMapper::toDTO)
                 .toList();

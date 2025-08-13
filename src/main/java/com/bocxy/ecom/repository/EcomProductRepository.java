@@ -33,6 +33,6 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
     List<String> findDistinctProductBrandsAndStatus(String status);
 
 
-    @Query("SELECT e FROM EcomProduct e WHERE e.projectName = :projectName")
-    List<EcomProduct> findByProjectName(String projectName);
+    @Query("SELECT e FROM EcomProduct e WHERE e.projectName = :projectName AND e.storeId=:storeId")
+    List<EcomProduct> findByProjectName(String projectName, String storeId);
 }
