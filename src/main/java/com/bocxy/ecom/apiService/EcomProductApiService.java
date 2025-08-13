@@ -52,9 +52,9 @@ public class EcomProductApiService {
     }
 
     public List<EcomProductDTO> getAll() {
-        return productService.findAll().stream()
+        return productService.getAll().stream()
                 .map(productMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public EcomProductDTO update(Long id, EcomProductCreateDTO createDTO) {

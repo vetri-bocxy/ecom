@@ -22,22 +22,18 @@ public class EcomProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = true)
     private String productId;
 
-    @Column(nullable = false)
     private String projectName;
-    @NotNull
-    @Size(max = 100)
     private String productName;
 
-    @Column(name = "product_category", nullable = false)
+    @Column(name = "product_category")
     private String productCategory;
 
-    @Column(name = "product_type", nullable = false)
+    @Column(name = "product_type")
     private String productType;
 
-    @Column(name = "product_formulation", nullable = false)
+    @Column(name = "product_formulation")
     private String productFormulation;
 
 
@@ -64,10 +60,10 @@ public class EcomProduct {
     private String details;
 
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     private String gender;
 
-    @Column(name = "product_brand", nullable = false)
+    @Column(name = "product_brand")
     private String productBrand;
 
     private String productImageUrl;

@@ -39,7 +39,7 @@ public class EcomProductController {
         return ResponseEntity.ok(apiService.getByUserId(userId));
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<EcomProductDTO>> getAll() {
         return ResponseEntity.ok(apiService.getAll());
     }
@@ -69,5 +69,4 @@ public class EcomProductController {
     public ResponseEntity<ProductBrandsAndCategoriesDTO> getAllBrandsAndCategories(){
         return ResponseEntity.ok(apiService.getAllProductBrandsAndCategories());
     }
-
 }

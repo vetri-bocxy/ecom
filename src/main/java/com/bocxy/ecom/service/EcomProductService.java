@@ -36,7 +36,7 @@ public class EcomProductService {
         return repository.findById(id);
     }
 
-    public List<EcomProduct> findAll() {
+    public List<EcomProduct> getAll() {
         return repository.findAll();
     }
 
@@ -52,10 +52,6 @@ public class EcomProductService {
     public List<EcomProduct> getAllByUserIdAndProjectName(Long id, String projectName) {
         return repository.findByUserIdAndProjectName(id,projectName);
 
-    }
-
-    public List<EcomProduct> getAll() {
-        return repository.findAll();
     }
 
     public List<String> getDistinctProductCategories() {
