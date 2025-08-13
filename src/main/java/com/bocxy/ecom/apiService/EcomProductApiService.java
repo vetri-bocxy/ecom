@@ -2,6 +2,7 @@ package com.bocxy.ecom.apiService;
 
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
+import com.bocxy.ecom.DTO.ProductBrandsAndCategoryDTO;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.service.EcomProductService;
@@ -73,4 +74,13 @@ public class EcomProductApiService {
                 .map(productMapper::toDTO)
                 .toList();
     }
+
+    public ProductBrandsAndCategoryDTO getAllProductBrandsAndCategory() {
+        ProductBrandsAndCategoryDTO dto=new ProductBrandsAndCategoryDTO();
+        List<EcomProduct> entity=productService.getAll();
+        dto.setProductCategory(entity.stream().map(EcomProduct::getProductCategory).toList());
+        dto.setProductBrand(entity.stream().map(EcomProduct::getProductBrand).toList());
+        return dto;
+    }
 }
+
