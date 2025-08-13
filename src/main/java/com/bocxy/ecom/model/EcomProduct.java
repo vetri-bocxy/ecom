@@ -47,7 +47,7 @@ public class EcomProduct {
     private String howToUse;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @NotNull

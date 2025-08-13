@@ -4,12 +4,18 @@ import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import com.bocxy.ecom.createDTO.EcomStatusDTO;
 import com.bocxy.ecom.model.EcomProduct;
+import com.bocxy.ecom.repository.EcomProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 
 @Component
 public class EcomStatusMapper {
+
+    @Autowired
+    private EcomProductRepository ecomProductRepository;
+
     public EcomProductDTO toDTO(EcomProduct product) {
         EcomProductDTO dto = new EcomProductDTO();
         dto.setId(product.getId());
@@ -34,26 +40,30 @@ public class EcomStatusMapper {
     }
 
     public EcomProduct toEntityApprove(EcomStatusDTO dto) {
-        EcomProduct product = new EcomProduct();
+        EcomProduct product = ecomProductRepository.findById(dto.getId())
+                .orElseThrow(()->new RuntimeException("Product Not found  "+dto.getId()));
+
         product.setProductId(dto.getProductId());
         product.setProjectName(dto.getProjectName());
         product.setProductName(dto.getProductName());
         product.setRejectRemarks(dto.getRejectRemarks());
         product.setId(dto.getId());
-        product.setStatus("approved");
+        product.setStatus(dto.getStatus());
         return product;
     }
 
 
 
     public EcomProduct toEntityReject(EcomStatusDTO dto) {
-        EcomProduct product = new EcomProduct();
+        EcomProduct product = ecomProductRepository.findById(dto.getId())
+                .orElseThrow(()->new RuntimeException("Product Not found  "+dto.getId()));
+
         product.setProductId(dto.getProductId());
         product.setProjectName(dto.getProjectName());
         product.setProductName(dto.getProductName());
         product.setRejectRemarks(dto.getRejectRemarks());
         product.setId(dto.getId());
-        product.setStatus("reject");
+        product.setStatus(dto.getStatus());
         return product;
     }
 

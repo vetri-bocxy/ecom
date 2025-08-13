@@ -54,8 +54,4 @@ public class EcomProductService {
         return repository.findByUserIdAndProjectName(id,projectName);
 
     }
-
-    public List<EcomProduct> getAll() {
-        return repository.findAll();
-    }
 }
