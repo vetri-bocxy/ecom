@@ -24,6 +24,7 @@ public class EcomProduct {
 
     @Column(unique = true, nullable = true)
     private String productId;
+
     @Column(nullable = false)
     private String projectName;
     @NotNull

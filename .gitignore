@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Log4j Generated Logs ###
+logs/
+*.log
+
+# Keep the log4j2 config file
+!src/main/resources/log4j2-spring.xml
+

@@ -30,4 +30,5 @@ public class EcomProductDTO {
     private String keyBenefits;
     private String otherInformation;
     private String howToUse;
+    private String status;
 }
