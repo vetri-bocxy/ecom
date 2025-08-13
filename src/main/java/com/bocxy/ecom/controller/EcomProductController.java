@@ -2,6 +2,7 @@ package com.bocxy.ecom.controller;
 
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
+import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
 import com.bocxy.ecom.apiService.EcomProductApiService;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +60,9 @@ public class EcomProductController {
         return ResponseEntity.ok(apiService.getAll(id,projectName));
     }
 
-
+    @GetMapping("/getAllProductBrandsAndCategories")
+    public ResponseEntity<ProductBrandsAndCategoriesDTO> getAllBrandsAndCategories(){
+        return ResponseEntity.ok(apiService.getAllProductBrandsAndCategories());
+    }
 
 }
