@@ -1,6 +1,8 @@
 package com.bocxy.ecom.service;
 
 import com.bocxy.ecom.model.EcomProduct;
+import com.bocxy.ecom.model.EcomProductQuantity;
+import com.bocxy.ecom.repository.EcomProductQuantityRepository;
 import com.bocxy.ecom.repository.EcomProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,11 @@ public class EcomProductService {
 
     private final EcomProductRepository repository;
 
-    public EcomProductService(EcomProductRepository repository) {
+    private final EcomProductQuantityRepository quantityRepository;
+
+    public EcomProductService(EcomProductRepository repository,EcomProductQuantityRepository quantityRepository) {
         this.repository = repository;
+        this.quantityRepository=quantityRepository;
     }
 
     public boolean existsByProductId(String productId) {
@@ -63,5 +68,9 @@ public class EcomProductService {
 
     public List<EcomProduct> getAllByProjectName(String projectName,String storeId) {
         return repository.findByProjectName(projectName,storeId);
+    }
+
+    public void saveQty(EcomProductQuantity qtyEntity) {
+        quantityRepository.save(qtyEntity);
     }
 }

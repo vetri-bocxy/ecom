@@ -5,6 +5,7 @@ import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
+import com.bocxy.ecom.model.EcomProductQuantity;
 import com.bocxy.ecom.service.EcomProductService;
 import org.springframework.stereotype.Service;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
@@ -30,8 +31,17 @@ public class EcomProductApiService {
                 throw new RuntimeException("Product with this ID already exists");
             }
         }
-
         EcomProduct saved = productService.save(productMapper.toEntity(createDTO));
+
+        EcomProductQuantity qtyEntity=new EcomProductQuantity();
+        qtyEntity.setQuantity(createDTO.getTotalQuantity());
+        qtyEntity.setEcomProduct(saved);
+        qtyEntity.setAvailable(createDTO.getTotalQuantity());
+        if(createDTO.getStoreId()!=null && !createDTO.getStoreId().isEmpty()){
+            qtyEntity.setStoreId(createDTO.getStoreId());
+        }
+        productService.saveQty(qtyEntity);
+
         return productMapper.toDTO(saved);
     }
 

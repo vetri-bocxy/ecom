@@ -31,4 +31,5 @@ public class EcomProductCreateDTO {
     private String keyBenefits;
     private String otherInformation;
     private Long userId;
+    private int totalQuantity;
 }
