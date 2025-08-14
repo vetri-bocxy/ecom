@@ -75,11 +75,16 @@ public class EcomProductApiService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public List<EcomProductDTO> getAll(Long id, String projectName) {
-        return productService.getAllByUserIdAndProjectName(id,projectName)
-                .stream()
-                .map(productMapper::toDTO)
-                .toList();
+    public EcomProductStatusWiseDto getAllByUserIdAndProjectName(Long id, String projectName) {
+        EcomProductStatusWiseDto dto=new EcomProductStatusWiseDto();
+        dto.setPending(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"pending")
+                .stream().map(productMapper::toDTO).toList());
+        dto.setPending(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"approved")
+                .stream().map(productMapper::toDTO).toList());
+        dto.setPending(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"rejected")
+                .stream().map(productMapper::toDTO).toList());
+
+        return dto;
     }
 
     public ProductBrandsAndCategoriesDTO getAllProductBrandsAndCategories() {

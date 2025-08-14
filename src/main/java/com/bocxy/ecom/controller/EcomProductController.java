@@ -58,8 +58,8 @@ public class EcomProductController {
     }
 
     @GetMapping("/getAllByUserIdAndProjectName")
-    public ResponseEntity<List<EcomProductDTO>> getByUserId(@RequestParam Long id,@RequestParam String projectName) {
-        return ResponseEntity.ok(apiService.getAll(id,projectName));
+    public ResponseEntity<EcomProductStatusWiseDto> getByUserId(@RequestParam Long id,@RequestParam String projectName) {
+        return ResponseEntity.ok(apiService.getAllByUserIdAndProjectName(id,projectName));
     }
 
     @GetMapping("/getAllByProjectName")

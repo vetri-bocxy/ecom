@@ -35,4 +35,7 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
 
     @Query("SELECT e FROM EcomProduct e WHERE e.projectName = :projectName AND e.storeId=:storeId")
     List<EcomProduct> findByProjectName(String projectName, String storeId);
+
+    List<EcomProduct> findByUserIdAndProjectNameAndStatus(Long id, String projectName, String status);
+
 }

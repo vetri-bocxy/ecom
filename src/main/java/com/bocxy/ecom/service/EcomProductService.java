@@ -55,8 +55,8 @@ public class EcomProductService {
         return products.isEmpty() ? Optional.empty() : Optional.of(products);
     }
 
-    public List<EcomProduct> getAllByUserIdAndProjectName(Long id, String projectName) {
-        return repository.findByUserIdAndProjectName(id,projectName);
+    public List<EcomProduct> getAllByUserIdAndProjectNameAndStatus(Long id, String projectName,String status) {
+        return repository.findByUserIdAndProjectNameAndStatus(id,projectName,status);
 
     }
 
