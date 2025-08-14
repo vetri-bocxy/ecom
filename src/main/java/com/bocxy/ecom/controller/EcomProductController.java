@@ -46,7 +46,7 @@ public class EcomProductController {
         return ResponseEntity.ok(apiService.getAll());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update")
     public ResponseEntity<EcomProductDTO> update(@RequestBody EcomProductUpdateDTO updateDTO) {
         return ResponseEntity.ok(apiService.update(updateDTO));
     }

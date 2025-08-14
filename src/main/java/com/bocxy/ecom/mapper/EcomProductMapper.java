@@ -89,7 +89,7 @@ public class EcomProductMapper {
         EcomProduct product=productRepository.findById(dto.getId())
                 .orElseThrow(()->new RuntimeException("Product not found for this id "+dto.getId()));
 
-        
+
         product.setProjectName(dto.getProjectName());
         product.setProductName(dto.getProductName());
         product.setProductCategory(dto.getProductCategory());
