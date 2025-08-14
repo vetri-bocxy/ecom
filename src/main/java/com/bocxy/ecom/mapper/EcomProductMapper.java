@@ -5,7 +5,9 @@ import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import com.bocxy.ecom.model.DealerRegistrationEntity;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.User;
+import com.bocxy.ecom.repository.EcomProductRepository;
 import com.bocxy.ecom.repository.UserRepository;
+import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,8 @@ public class EcomProductMapper {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    EcomProductRepository productRepository;
 
 
     public EcomProductDTO toDTO(EcomProduct product) {
@@ -53,6 +57,39 @@ public class EcomProductMapper {
         }
 
         // Map all fields
+        product.setProjectName(dto.getProjectName());
+        product.setProductName(dto.getProductName());
+        product.setProductCategory(dto.getProductCategory());
+        product.setProductType(dto.getProductType());
+        product.setProductFormulation(dto.getProductFormulation());
+        product.setDiscountPrice(dto.getDiscountPrice());
+        product.setComparedPrice(dto.getComparedPrice());
+        product.setDescription(dto.getDescription());
+        product.setGstPercentage(dto.getGstPercentage());
+        product.setDetails(dto.getDetails());
+        product.setHowToUse(dto.getHowToUse());
+        product.setKeyBenefits(dto.getKeyBenefits());
+        product.setOtherInformation(dto.getOtherInformation());
+        product.setGender(dto.getGender());
+        product.setProductBrand(dto.getProductBrand());
+        product.setProductImageUrl(dto.getProductImageUrl());
+        product.setStoreId(dto.getStoreId());
+        product.setStatus("pending");
+
+        // Only fetch and set user if userId is provided
+        if (dto.getUserId() != null) {
+            userRepository.findById(dto.getUserId())
+                    .ifPresent(product::setUser);
+        }
+
+        return product;
+    }
+
+    public EcomProduct toEntity(EcomProductUpdateDTO dto) {
+        EcomProduct product=productRepository.findById(dto.getId())
+                .orElseThrow(()->new RuntimeException("Product not found for this id "+dto.getId()));
+
+        
         product.setProjectName(dto.getProjectName());
         product.setProductName(dto.getProductName());
         product.setProductCategory(dto.getProductCategory());

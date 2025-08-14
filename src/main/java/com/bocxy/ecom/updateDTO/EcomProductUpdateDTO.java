@@ -1,0 +1,36 @@
+package com.bocxy.ecom.updateDTO;
+
+
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+@Data
+public class EcomProductUpdateDTO {
+
+    private Long id;
+    private String productId;
+    private String projectName;
+    private String productName;
+    private String productCategory;
+    private String productType;
+    private String productFormulation;
+    private BigDecimal discountPrice;
+    private BigDecimal comparedPrice;
+    private String howToUse;
+    private String description;
+    private String gstPercentage;
+    private String details;
+    private String gender;
+    private String productBrand;
+    private String productImageUrl;
+    private String storeId;
+    private String status;
+    private String rejectRemarks;
+    private String brandId;
+    private String franchiseId;
+    private String keyBenefits;
+    private String otherInformation;
+    private Long userId;
+    private int totalQuantity;
+}

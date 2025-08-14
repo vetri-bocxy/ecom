@@ -8,6 +8,7 @@ import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
 import com.bocxy.ecom.service.EcomProductService;
+import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
 import org.springframework.stereotype.Service;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 
@@ -58,12 +59,8 @@ public class EcomProductApiService {
                 .toList();
     }
 
-    public EcomProductDTO update(Long id, EcomProductCreateDTO createDTO) {
-        EcomProduct existing = productService.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
-        EcomProduct updated = productMapper.toEntity(createDTO);
-        updated.setId(existing.getId());
-        return productMapper.toDTO(productService.save(updated));
+    public EcomProductDTO update(EcomProductUpdateDTO dto) {
+        return productMapper.toDTO(productService.update(productMapper.toEntity(dto)));
     }
 
     public void delete(Long id) {

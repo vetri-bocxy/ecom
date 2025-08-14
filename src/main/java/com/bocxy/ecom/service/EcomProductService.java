@@ -1,10 +1,13 @@
 package com.bocxy.ecom.service;
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
+import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
 import com.bocxy.ecom.repository.EcomProductQuantityRepository;
 import com.bocxy.ecom.repository.EcomProductRepository;
+import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,6 +18,8 @@ import java.util.Optional;
 @Transactional
 @Service
 public class EcomProductService {
+    @Autowired
+    EcomProductMapper productMapper;
 
     private final EcomProductRepository repository;
 
@@ -73,5 +78,9 @@ public class EcomProductService {
 
     public List<EcomProduct> getByEcomProductStatus(String status) {
         return repository.findByStatus(status);
+    }
+
+    public EcomProduct update(EcomProduct entity) {
+        return repository.save(entity);
     }
 }

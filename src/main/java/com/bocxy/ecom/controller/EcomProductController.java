@@ -6,6 +6,7 @@ import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
 import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
 import com.bocxy.ecom.apiService.EcomProductApiService;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
+import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,8 +47,8 @@ public class EcomProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EcomProductDTO> update(@PathVariable Long id, @RequestBody EcomProductCreateDTO createDTO) {
-        return ResponseEntity.ok(apiService.update(id, createDTO));
+    public ResponseEntity<EcomProductDTO> update(@RequestBody EcomProductUpdateDTO updateDTO) {
+        return ResponseEntity.ok(apiService.update(updateDTO));
     }
 
     @DeleteMapping("/{id}")
