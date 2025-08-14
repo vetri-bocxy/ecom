@@ -79,9 +79,9 @@ public class EcomProductApiService {
         EcomProductStatusWiseDto dto=new EcomProductStatusWiseDto();
         dto.setPending(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"pending")
                 .stream().map(productMapper::toDTO).toList());
-        dto.setPending(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"approved")
+        dto.setApproved(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"approved")
                 .stream().map(productMapper::toDTO).toList());
-        dto.setPending(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"rejected")
+        dto.setRejected(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"rejected")
                 .stream().map(productMapper::toDTO).toList());
 
         return dto;
