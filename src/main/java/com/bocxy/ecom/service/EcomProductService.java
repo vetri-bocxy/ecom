@@ -99,4 +99,9 @@ public class EcomProductService {
 
         return dto;
     }
+
+    public List<String> getAllProductCategory() {
+        return repository.findAllProductCategory();
+    }
+
 }

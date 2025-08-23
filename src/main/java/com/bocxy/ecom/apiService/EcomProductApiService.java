@@ -115,4 +115,8 @@ public class EcomProductApiService {
     public ProductCountDTO getAllDealerProductCountAndMonth(Long userId) {
         return productService.getAllDealerProductCountAndMonth(userId);
     }
+
+    public List<String> getAllProductCategory() {
+        return productService.getAllProductCategory();
+    }
 }

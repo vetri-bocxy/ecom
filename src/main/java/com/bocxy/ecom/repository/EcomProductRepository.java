@@ -67,4 +67,7 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
             "AND status=:status",
             nativeQuery = true)
     long findProductCountByMonthAndUserAndStatus(@Param("userId") Long userId,String status);
+
+    @Query(value = "SELECT DISTINCT product_category FROM ecom_product", nativeQuery = true)
+    List<String> findAllProductCategory();
 }

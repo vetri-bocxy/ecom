@@ -73,18 +73,18 @@ public class EcomProductController {
         return ResponseEntity.ok(apiService.getAllProductBrandsAndCategories());
     }
 
-    @GetMapping("getEcomProductStatusWise")
+    @GetMapping("/getEcomProductStatusWise")
     public ResponseEntity<EcomProductStatusWiseDto> getEcomProductStatusWise() {
         return ResponseEntity.ok(apiService.getEcomProductStatusWise());
     }
 
-    @GetMapping("getAllDealerProductCountAndMonth")
+    @GetMapping("/getAllDealerProductCountAndMonth")
     public ResponseEntity<ProductCountDTO> getAllDealerProductCountAndMonth(@RequestParam(required = false) Long userId) {
         return ResponseEntity.ok(apiService.getAllDealerProductCountAndMonth(userId));
     }
-//
-//    @GetMapping("getAllProductCategory")
-//    public ResponseEntity<List<String>> getAllProductCategory() {
-//        return ResponseEntity.ok(apiService.getAllProductCategory());
-//    }
+
+    @GetMapping("getAllProductCategory")
+    public ResponseEntity<List<String>> getAllProductCategory() {
+        return ResponseEntity.ok(apiService.getAllProductCategory());
+    }
 }
