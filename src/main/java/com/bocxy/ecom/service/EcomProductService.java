@@ -1,6 +1,7 @@
 package com.bocxy.ecom.service;
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
+import com.bocxy.ecom.DTO.ProductCountDTO;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
@@ -82,5 +83,20 @@ public class EcomProductService {
 
     public EcomProduct update(EcomProduct entity) {
         return repository.save(entity);
+    }
+
+    public ProductCountDTO getAllDealerProductCountAndMonth(Long userId) {
+        ProductCountDTO dto=new ProductCountDTO();
+        dto.setAllProducts(String.valueOf(repository.findProductCount(userId)));
+        dto.setAllApprovedProducts(String.valueOf(repository.countByStatusAndUserId("approved",userId)));
+        dto.setAllPendingProducts(String.valueOf(repository.countByStatusAndUserId("pending",userId)));
+        dto.setAllRejectedProducts(String.valueOf(repository.countByStatusAndUserId("rejected",userId)));
+
+        dto.setThisMonthProducts(String.valueOf(repository.findProductCountByMonthAndUser(userId)));
+        dto.setThisMonthApprovedProducts(String.valueOf(repository.findProductCountByMonthAndUserAndStatus(userId,"approved")));
+        dto.setThisMonthPendingProducts(String.valueOf(repository.findProductCountByMonthAndUserAndStatus(userId,"pending")));
+        dto.setThisMonthRejectedProducts(String.valueOf(repository.findProductCountByMonthAndUserAndStatus(userId,"rejected")));
+
+        return dto;
     }
 }

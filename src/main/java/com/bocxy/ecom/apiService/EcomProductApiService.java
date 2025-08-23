@@ -4,6 +4,7 @@ package com.bocxy.ecom.apiService;
 import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
 import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
+import com.bocxy.ecom.DTO.ProductCountDTO;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
@@ -109,5 +110,9 @@ public class EcomProductApiService {
         dto.setRejected(productService.getByEcomProductStatus("rejected").stream().map(productMapper::toDTO).toList());
         return dto;
 
+    }
+
+    public ProductCountDTO getAllDealerProductCountAndMonth(Long userId) {
+        return productService.getAllDealerProductCountAndMonth(userId);
     }
 }

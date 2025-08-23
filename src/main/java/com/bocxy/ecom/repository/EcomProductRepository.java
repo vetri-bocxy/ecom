@@ -38,4 +38,28 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
 
     List<EcomProduct> findByUserIdAndProjectNameAndStatus(Long id, String projectName, String status);
 
+//    String findByUserIdAndMonthYearAndProjectName(String userId, String monthAndYear, String projectName);
+
+//    Long countByUserId(Long userId);
+
+    @Query(value = "SELECT COUNT(*) " +
+            "FROM ecom_product " +
+            "WHERE (:userId IS NULL OR user_id = :userId)",
+            nativeQuery = true)
+    long findProductCount(@Param("userId") Long userId);
+
+     long countByStatusAndUserId(String status,Long userId);
+
+    @Query(value = "SELECT COUNT(*) FROM ecom_product " +
+            "WHERE DATE_FORMAT(created_at, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m') " +
+            "AND (:userId IS NULL OR user_id = :userId)",
+            nativeQuery = true)
+    long findProductCountByMonthAndUser(@Param("userId") Long userId);
+
+    @Query(value = "SELECT COUNT(*) FROM ecom_product " +
+            "WHERE DATE_FORMAT(created_at, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m') " +
+            "AND (:userId IS NULL OR user_id = :userId)"+
+            "AND status=:status",
+            nativeQuery = true)
+    long findProductCountByMonthAndUserAndStatus(@Param("userId") Long userId,String status);
 }
