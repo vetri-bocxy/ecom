@@ -82,4 +82,9 @@ public class EcomProductController {
     public ResponseEntity<ProductCountDTO> getAllDealerProductCountAndMonth(@RequestParam(required = false) Long userId) {
         return ResponseEntity.ok(apiService.getAllDealerProductCountAndMonth(userId));
     }
+//
+//    @GetMapping("getAllProductCategory")
+//    public ResponseEntity<List<String>> getAllProductCategory() {
+//        return ResponseEntity.ok(apiService.getAllProductCategory());
+//    }
 }
