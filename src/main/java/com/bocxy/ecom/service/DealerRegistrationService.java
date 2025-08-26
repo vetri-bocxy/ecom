@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -105,5 +106,9 @@ public class DealerRegistrationService {
 
             emailService.sendEmail(dealer.getEmail(), subject, body);
         }
+    }
+
+    public DealerRegistrationEntity findById(Long id) {
+        return dealerRegistrationRepository.findById(id).orElseThrow(()->new EntityNotFoundException("no data found for this id "+ id));
     }
 }

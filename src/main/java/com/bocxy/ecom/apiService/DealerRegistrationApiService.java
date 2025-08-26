@@ -41,4 +41,8 @@ public class DealerRegistrationApiService {
     public DealerRegistrationResponseDTO update(DealerRegistrationUpdateDTO registrationUpdateDTO) {
         return dealerRegistrationMapper.toResponseDTO(dealerRegistrationService.update(dealerRegistrationMapper.toEntity(registrationUpdateDTO)));
     }
+
+    public DealerRegistrationResponseDTO getById(Long id) {
+        return dealerRegistrationMapper.toResponseDTO(dealerRegistrationService.findById(id));
+    }
 }

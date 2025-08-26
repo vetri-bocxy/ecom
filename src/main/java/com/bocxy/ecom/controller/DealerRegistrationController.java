@@ -70,4 +70,9 @@ public class DealerRegistrationController {
         return ResponseEntity.ok(new ResponseDTO(200, "Dealers fetched successfully", dealerList));
     }
 
+    @GetMapping("/getById")
+    public ResponseEntity<ResponseDTO> getById(@RequestParam Long id){
+        return ResponseEntity.ok(new ResponseDTO(200, "Dealers fetched successfully", dealerRegistrationApiService.getById(id)));
+    }
+
 }
