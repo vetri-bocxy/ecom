@@ -104,4 +104,18 @@ public class EcomProductService {
         return repository.findAllProductCategory();
     }
 
+    public ProductCountDTO getAllPartnerProductCountAndMonth(String storeId, String projectName) {
+        ProductCountDTO dto=new ProductCountDTO();
+        dto.setAllProducts(String.valueOf(repository.findProductCountByStoreIdAndProjectName(storeId,projectName)));
+        dto.setAllApprovedProducts(String.valueOf(repository.countByStatusAndStoreIdAndProjectName("approved",storeId,projectName)));
+        dto.setAllPendingProducts(String.valueOf(repository.countByStatusAndStoreIdAndProjectName("pending",storeId,projectName)));
+        dto.setAllRejectedProducts(String.valueOf(repository.countByStatusAndStoreIdAndProjectName("rejected",storeId,projectName)));
+
+        dto.setThisMonthProducts(String.valueOf(repository.findPartnerProductCountByMonthAndStoreIdAndProjectName(storeId,projectName)));
+        dto.setThisMonthApprovedProducts(String.valueOf(repository.findPartnerProductCountByMonthAndStatusAndStoreIdAndProjectName("approved",storeId,projectName)));
+        dto.setThisMonthPendingProducts(String.valueOf(repository.findPartnerProductCountByMonthAndStatusAndStoreIdAndProjectName("pending",storeId,projectName)));
+        dto.setThisMonthRejectedProducts(String.valueOf(repository.findPartnerProductCountByMonthAndStatusAndStoreIdAndProjectName("rejected",storeId,projectName)));
+
+        return dto;
+    }
 }

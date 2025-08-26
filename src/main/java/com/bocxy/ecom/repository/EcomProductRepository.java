@@ -70,4 +70,33 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
 
     @Query(value = "SELECT DISTINCT product_category FROM ecom_product", nativeQuery = true)
     List<String> findAllProductCategory();
+
+    @Query(value = "SELECT COUNT(*) " +
+            "FROM ecom_product " +
+            "WHERE store_id = :storeId "+
+            "AND project_name=:projectName ",
+            nativeQuery = true)
+    long findProductCountByStoreIdAndProjectName(String storeId, String projectName);
+
+    @Query(value = "SELECT COUNT(*) FROM ecom_product " +
+            "WHERE status = :status " +
+            "AND store_id =:storeId "+
+            "AND project_name=:projectName",
+            nativeQuery = true)
+    long countByStatusAndStoreIdAndProjectName(String status, String storeId, String projectName);
+
+    @Query(value = "SELECT COUNT(*) FROM ecom_product " +
+            "WHERE DATE_FORMAT(created_at, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m') " +
+            "AND store_id =:storeId "+
+            "AND project_name=:projectName",
+            nativeQuery = true)
+    long findPartnerProductCountByMonthAndStoreIdAndProjectName(String storeId, String projectName);
+
+    @Query(value = "SELECT COUNT(*) FROM ecom_product " +
+            "WHERE DATE_FORMAT(created_at, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m') " +
+            "AND store_id=:storeId "+
+            "AND project_name=:projectName "+
+            "AND status=:status",
+            nativeQuery = true)
+    long findPartnerProductCountByMonthAndStatusAndStoreIdAndProjectName(String status,String storeId,String projectName);
 }

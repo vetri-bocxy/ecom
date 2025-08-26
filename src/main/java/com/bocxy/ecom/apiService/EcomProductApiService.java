@@ -10,8 +10,10 @@ import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
 import com.bocxy.ecom.service.EcomProductService;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,18 +31,18 @@ public class EcomProductApiService {
     }
 
     public EcomProductDTO create(EcomProductCreateDTO createDTO) {
-        if(createDTO.getProductId()!=null){
+        if (createDTO.getProductId() != null) {
             if (productService.existsByProductId(createDTO.getProductId())) {
                 throw new RuntimeException("Product with this ID already exists");
             }
         }
         EcomProduct saved = productService.save(productMapper.toEntity(createDTO));
 
-        EcomProductQuantity qtyEntity=new EcomProductQuantity();
+        EcomProductQuantity qtyEntity = new EcomProductQuantity();
         qtyEntity.setQuantity(createDTO.getTotalQuantity());
         qtyEntity.setEcomProduct(saved);
         qtyEntity.setAvailable(createDTO.getTotalQuantity());
-        if(createDTO.getStoreId()!=null && !createDTO.getStoreId().isEmpty()){
+        if (createDTO.getStoreId() != null && !createDTO.getStoreId().isEmpty()) {
             qtyEntity.setStoreId(createDTO.getStoreId());
         }
         productService.saveQty(qtyEntity);
@@ -77,34 +79,34 @@ public class EcomProductApiService {
     }
 
     public EcomProductStatusWiseDto getAllByUserIdAndProjectName(Long id, String projectName) {
-        EcomProductStatusWiseDto dto=new EcomProductStatusWiseDto();
-        dto.setPending(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"pending")
+        EcomProductStatusWiseDto dto = new EcomProductStatusWiseDto();
+        dto.setPending(productService.getAllByUserIdAndProjectNameAndStatus(id, projectName, "pending")
                 .stream().map(productMapper::toDTO).toList());
-        dto.setApproved(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"approved")
+        dto.setApproved(productService.getAllByUserIdAndProjectNameAndStatus(id, projectName, "approved")
                 .stream().map(productMapper::toDTO).toList());
-        dto.setRejected(productService.getAllByUserIdAndProjectNameAndStatus(id,projectName,"rejected")
+        dto.setRejected(productService.getAllByUserIdAndProjectNameAndStatus(id, projectName, "rejected")
                 .stream().map(productMapper::toDTO).toList());
 
         return dto;
     }
 
     public ProductBrandsAndCategoriesDTO getAllProductBrandsAndCategories() {
-        ProductBrandsAndCategoriesDTO dto=new ProductBrandsAndCategoriesDTO();
+        ProductBrandsAndCategoriesDTO dto = new ProductBrandsAndCategoriesDTO();
         dto.setProductCategory(productService.getDistinctProductCategories());
         dto.setProductBrand(productService.getDistinctProductBrand());
         return dto;
     }
 
 
-    public List<EcomProductDTO> getAllByProjectName(String projectName,String storeId) {
-        return productService.getAllByProjectName(projectName,storeId)
+    public List<EcomProductDTO> getAllByProjectName(String projectName, String storeId) {
+        return productService.getAllByProjectName(projectName, storeId)
                 .stream()
                 .map(productMapper::toDTO)
                 .toList();
     }
 
     public EcomProductStatusWiseDto getEcomProductStatusWise() {
-        EcomProductStatusWiseDto dto=new EcomProductStatusWiseDto();
+        EcomProductStatusWiseDto dto = new EcomProductStatusWiseDto();
         dto.setPending(productService.getByEcomProductStatus("pending").stream().map(productMapper::toDTO).toList());
         dto.setApproved(productService.getByEcomProductStatus("approved").stream().map(productMapper::toDTO).toList());
         dto.setRejected(productService.getByEcomProductStatus("rejected").stream().map(productMapper::toDTO).toList());
@@ -118,5 +120,9 @@ public class EcomProductApiService {
 
     public List<String> getAllProductCategory() {
         return productService.getAllProductCategory();
+    }
+
+    public ProductCountDTO getAllPartnerProductCountAndMonth(String storeId, String projectName) {
+        return productService.getAllPartnerProductCountAndMonth(storeId, projectName);
     }
 }
