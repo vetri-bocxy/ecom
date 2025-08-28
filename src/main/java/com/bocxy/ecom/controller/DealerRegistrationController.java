@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -73,6 +75,14 @@ public class DealerRegistrationController {
     @GetMapping("/getById")
     public ResponseEntity<ResponseDTO> getById(@RequestParam Long id){
         return ResponseEntity.ok(new ResponseDTO(200, "Dealers fetched successfully", dealerRegistrationApiService.getById(id)));
+    }
+
+    @GetMapping("/getAllBusinessNameAndGSTNumber")
+    public ResponseEntity<ResponseDTO> getAllStoreNameAndGSTNumber(){
+        Map<String,List<String>> result=new HashMap<>();
+        result.put("businessNames",dealerRegistrationApiService.getAllBusinessName());
+        result.put("GSTNumbers",dealerRegistrationApiService.getAllGSTNumber());
+        return ResponseEntity.ok(new ResponseDTO(200, "Dealers fetched successfully",result));
     }
 
 }

@@ -111,4 +111,12 @@ public class DealerRegistrationService {
     public DealerRegistrationEntity findById(Long id) {
         return dealerRegistrationRepository.findById(id).orElseThrow(()->new EntityNotFoundException("no data found for this id "+ id));
     }
+
+    public List<String> getAllBusinessName() {
+        return dealerRegistrationRepository.findAllBusinessName();
+    }
+
+    public List<String> getAllGSTNumber() {
+        return dealerRegistrationRepository.findAllGSTNumber();
+    }
 }

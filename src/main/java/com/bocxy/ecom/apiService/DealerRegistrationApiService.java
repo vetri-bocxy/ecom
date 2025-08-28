@@ -45,4 +45,12 @@ public class DealerRegistrationApiService {
     public DealerRegistrationResponseDTO getById(Long id) {
         return dealerRegistrationMapper.toResponseDTO(dealerRegistrationService.findById(id));
     }
+
+    public List<String> getAllBusinessName() {
+        return dealerRegistrationService.getAllBusinessName();
+    }
+
+    public List<String> getAllGSTNumber() {
+        return dealerRegistrationService.getAllGSTNumber();
+    }
 }
