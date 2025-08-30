@@ -58,7 +58,9 @@ public class SecurityConfig {
         baseConfig.setMaxAge(3600L);
 
         // Production allowed origins list (currently empty)
-        List<String> allowedOrigins = List.of();
+        List<String> allowedOrigins = List.of(
+                "https://partners.bocxy.com"
+        );
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource() {
             @Override
