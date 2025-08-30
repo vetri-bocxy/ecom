@@ -16,7 +16,11 @@ public class EcomProductUpdateDTO {
     private String productType;
     private String productFormulation;
     private BigDecimal discountPrice;
-    private BigDecimal comparedPrice;
+    private BigDecimal sellerPrice;
+    private BigDecimal platformPrice;
+    private BigDecimal adminDiscountPrice;
+    private int adminDiscount;
+    private BigDecimal mrpPrice;
     private String howToUse;
     private String description;
     private String gstPercentage;

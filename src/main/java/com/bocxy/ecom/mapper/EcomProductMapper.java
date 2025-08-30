@@ -30,7 +30,11 @@ public class EcomProductMapper {
         dto.setProductType(product.getProductType());
         dto.setProductFormulation(product.getProductFormulation());
         dto.setDiscountPrice(product.getDiscountPrice());
-        dto.setComparedPrice(product.getComparedPrice());
+        dto.setSellerPrice(product.getSellerPrice());
+        dto.setPlatformPrice(product.getPlatformPrice());
+        dto.setAdminDiscountPrice(product.getAdminDiscountPrice());
+        dto.setAdminDiscount(product.getAdminDiscount());
+        dto.setMrpPrice(product.getMrpPrice());
         dto.setDescription(product.getDescription());
         dto.setGstPercentage(product.getGstPercentage());
         dto.setDetails(product.getDetails());
@@ -63,7 +67,11 @@ public class EcomProductMapper {
         product.setProductType(dto.getProductType());
         product.setProductFormulation(dto.getProductFormulation());
         product.setDiscountPrice(dto.getDiscountPrice());
-        product.setComparedPrice(dto.getComparedPrice());
+        product.setSellerPrice(dto.getSellerPrice());
+        product.setPlatformPrice(dto.getPlatformPrice());
+        product.setAdminDiscountPrice(dto.getAdminDiscountPrice());
+        product.setAdminDiscount(dto.getAdminDiscount());
+        product.setMrpPrice(dto.getMrpPrice());
         product.setDescription(dto.getDescription());
         product.setGstPercentage(dto.getGstPercentage());
         product.setDetails(dto.getDetails());
@@ -96,7 +104,11 @@ public class EcomProductMapper {
         product.setProductType(dto.getProductType());
         product.setProductFormulation(dto.getProductFormulation());
         product.setDiscountPrice(dto.getDiscountPrice());
-        product.setComparedPrice(dto.getComparedPrice());
+        product.setSellerPrice(dto.getSellerPrice());
+        product.setPlatformPrice(dto.getPlatformPrice());
+        product.setAdminDiscountPrice(dto.getAdminDiscountPrice());
+        product.setAdminDiscount(dto.getAdminDiscount());
+        product.setMrpPrice(dto.getMrpPrice());
         product.setDescription(dto.getDescription());
         product.setGstPercentage(dto.getGstPercentage());
         product.setDetails(dto.getDetails());

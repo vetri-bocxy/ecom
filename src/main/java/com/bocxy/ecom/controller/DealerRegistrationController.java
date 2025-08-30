@@ -1,6 +1,5 @@
 package com.bocxy.ecom.controller;
 
-
 import com.bocxy.ecom.DTO.DealerRegistrationResponseDTO;
 import com.bocxy.ecom.DTO.ResponseDTO;
 import com.bocxy.ecom.Exception.UsernameAlreadyExistsException;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 @RestController
 @RequestMapping("/api/dealerRegister")

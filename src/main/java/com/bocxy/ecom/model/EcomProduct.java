@@ -21,67 +21,45 @@ public class EcomProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String productId;
-
     private String projectName;
     private String productName;
-
     @Column(name = "product_category")
     private String productCategory;
-
     @Column(name = "product_type")
     private String productType;
-
     @Column(name = "product_formulation")
     private String productFormulation;
-
-
-    @NotNull
     private BigDecimal discountPrice;
-
+    private BigDecimal sellerPrice;
+    private BigDecimal platformPrice;
+    private BigDecimal adminDiscountPrice;
+    private int adminDiscount;
     @Column(name="how_to_use")
     private String howToUse;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @NotNull
-    private BigDecimal comparedPrice;
-
+    private BigDecimal mrpPrice;
     @Column(length = 1000)
     private String description;
-
     private String gstPercentage;
-
-
     @Column(length = 1000)
     private String details;
-
-
     @Column(name = "gender")
     private String gender;
-
     @Column(name = "product_brand")
     private String productBrand;
-
     private String productImageUrl;
-
     private String storeId;
-
     @CreationTimestamp
     private LocalDateTime createdAt;
-
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
     @UpdateTimestamp
     private LocalDateTime statusAt;
-
     @Column(name="status")
     private String status;
-
     @Column(name="reject_remarks")
     private String rejectRemarks;
     @Column(name="brand_id")

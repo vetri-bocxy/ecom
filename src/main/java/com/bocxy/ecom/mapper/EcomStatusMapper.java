@@ -26,7 +26,7 @@ public class EcomStatusMapper {
         dto.setProductType(product.getProductType());
         dto.setProductFormulation(product.getProductFormulation());
         dto.setDiscountPrice(product.getDiscountPrice());
-        dto.setComparedPrice(product.getComparedPrice());
+        dto.setMrpPrice(product.getMrpPrice());
         dto.setDescription(product.getDescription());
         dto.setGstPercentage(product.getGstPercentage());
         dto.setDetails(product.getDetails());
