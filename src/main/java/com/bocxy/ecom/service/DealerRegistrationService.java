@@ -32,20 +32,31 @@ public class DealerRegistrationService {
 
 
     public DealerRegistrationEntity create(DealerRegistrationEntity entity) {
-
         DealerRegistrationEntity savedDealer = dealerRegistrationRepository.save(entity);
 
-        // Send Welcome Mail
-        String subject = "Welcome to Bocxy Portal - Pending Approval";
-        String body = "Hello " + savedDealer.getBusinessName() + ",\n\n"
-                + "Thank you for registering with us. Your dealer account is currently under review.\n"
-                + "You will receive an email once it has been approved.\n\n"
-                + "Regards,\nBocxy Team";
+        // Prepare dynamic content
+        String dealerName = savedDealer.getBusinessName(); // Dealer's name dynamically
+        String emailBody = "Dear " + dealerName + ",\n\n"
+                + "Thank you for showing interest in partnering with *Bocxy Technologies*.\n\n"
+                + "We have received your dealer registration request and our team will review your details shortly.\n\n"
+                + "Once approved, you will receive your dealer account login credentials to access our platform.\n\n"
+                + "This is an automated message, please do not reply.\n"
+                + "For assistance, contact +91-97878 97873\n\n"
+                + "Best Regards,\nTeam Bocxy Technologies";
 
-        emailService.sendEmail(savedDealer.getEmail(), subject, body);
+        String subject = "Welcome to Bocxy Portal - Pending Approval";
+
+        // Log the content that will be sent
+        System.out.println("Sending email to: " + savedDealer.getEmail());
+        System.out.println("Email subject: " + subject);
+        System.out.println("Email body: " + emailBody);
+
+        // Send the email
+        emailService.sendEmail(savedDealer.getEmail(), subject, emailBody);
 
         return savedDealer;
     }
+
 
 
     @Transactional
