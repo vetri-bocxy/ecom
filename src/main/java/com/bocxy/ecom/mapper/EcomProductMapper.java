@@ -2,9 +2,7 @@ package com.bocxy.ecom.mapper;
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
-import com.bocxy.ecom.model.DealerRegistrationEntity;
 import com.bocxy.ecom.model.EcomProduct;
-import com.bocxy.ecom.model.User;
 import com.bocxy.ecom.repository.EcomProductRepository;
 import com.bocxy.ecom.repository.UserRepository;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
@@ -15,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class EcomProductMapper {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
     @Autowired
     EcomProductRepository productRepository;
 
