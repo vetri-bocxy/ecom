@@ -49,6 +49,8 @@ public class EcomStatusMapper {
         product.setRejectRemarks(dto.getRejectRemarks());
         product.setId(dto.getId());
         product.setStatus(dto.getStatus());
+        product.setPlatformPrice(dto.getPlatformPrice());
+        product.setAdminDiscount(dto.getAdminDiscount());
         return product;
     }
 

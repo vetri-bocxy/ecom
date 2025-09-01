@@ -2,6 +2,7 @@ package com.bocxy.ecom.createDTO;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 @Data
@@ -14,4 +15,6 @@ public class EcomStatusDTO {
     private String status;
     private ZonedDateTime statusAt;
     private String rejectRemarks;
+    private BigDecimal platformPrice;
+    private int adminDiscount;
 }
