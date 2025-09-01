@@ -20,6 +20,8 @@ public class EcomProductUpdateDTO {
     private BigDecimal platformPrice;
     private BigDecimal adminDiscountPrice;
     private int adminDiscount;
+    private int totalQuantity;
+    private int availableQuantity;
     private BigDecimal mrpPrice;
     private String howToUse;
     private String description;
@@ -36,5 +38,4 @@ public class EcomProductUpdateDTO {
     private String keyBenefits;
     private String otherInformation;
     private Long userId;
-    private int totalQuantity;
 }

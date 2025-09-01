@@ -5,8 +5,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -35,6 +33,8 @@ public class EcomProduct {
     private BigDecimal platformPrice;
     private BigDecimal adminDiscountPrice;
     private int adminDiscount;
+    private int totalQuantity;
+    private int availableQuantity;
     @Column(name="how_to_use")
     private String howToUse;
     @OneToOne

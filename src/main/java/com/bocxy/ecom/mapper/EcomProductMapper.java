@@ -34,6 +34,8 @@ public class EcomProductMapper {
         dto.setPlatformPrice(product.getPlatformPrice());
         dto.setAdminDiscountPrice(product.getAdminDiscountPrice());
         dto.setAdminDiscount(product.getAdminDiscount());
+        dto.setAvailableQuantity(product.getAvailableQuantity());
+        dto.setTotalQuantity(product.getTotalQuantity());
         dto.setMrpPrice(product.getMrpPrice());
         dto.setDescription(product.getDescription());
         dto.setGstPercentage(product.getGstPercentage());
@@ -71,6 +73,8 @@ public class EcomProductMapper {
         product.setPlatformPrice(dto.getPlatformPrice());
         product.setAdminDiscountPrice(dto.getAdminDiscountPrice());
         product.setAdminDiscount(dto.getAdminDiscount());
+        product.setAvailableQuantity(dto.getAvailableQuantity());
+        product.setTotalQuantity(dto.getTotalQuantity());
         product.setMrpPrice(dto.getMrpPrice());
         product.setDescription(dto.getDescription());
         product.setGstPercentage(dto.getGstPercentage());
@@ -108,6 +112,8 @@ public class EcomProductMapper {
         product.setPlatformPrice(dto.getPlatformPrice());
         product.setAdminDiscountPrice(dto.getAdminDiscountPrice());
         product.setAdminDiscount(dto.getAdminDiscount());
+        product.setAvailableQuantity(dto.getAvailableQuantity());
+        product.setTotalQuantity(dto.getTotalQuantity());
         product.setMrpPrice(dto.getMrpPrice());
         product.setDescription(dto.getDescription());
         product.setGstPercentage(dto.getGstPercentage());

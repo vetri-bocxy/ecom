@@ -21,6 +21,8 @@ public class EcomProductDTO {
     private BigDecimal platformPrice;
     private BigDecimal adminDiscountPrice;
     private int adminDiscount;
+    private int totalQuantity;
+    private int availableQuantity;
     private BigDecimal mrpPrice;
     private String description;
     private String gstPercentage;
