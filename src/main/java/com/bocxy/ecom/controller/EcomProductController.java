@@ -51,6 +51,7 @@ public class EcomProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
+
         apiService.delete(id);
         return ResponseEntity.ok("Product deleted successfully");
     }

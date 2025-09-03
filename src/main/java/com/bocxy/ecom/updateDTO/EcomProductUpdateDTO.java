@@ -19,6 +19,9 @@ public class EcomProductUpdateDTO {
     private BigDecimal sellerPrice;
     private BigDecimal platformPrice;
     private BigDecimal adminDiscountPrice;
+    private BigDecimal adminGstAmount;
+    private BigDecimal sellerPayableAmount;
+    private BigDecimal bocxyDeductionAmount;
     private int adminDiscount;
     private int totalQuantity;
     private int availableQuantity;

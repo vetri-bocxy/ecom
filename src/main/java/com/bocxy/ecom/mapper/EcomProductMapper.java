@@ -31,6 +31,9 @@ public class EcomProductMapper {
         dto.setSellerPrice(product.getSellerPrice());
         dto.setPlatformPrice(product.getPlatformPrice());
         dto.setAdminDiscountPrice(product.getAdminDiscountPrice());
+        dto.setAdminGstAmount(product.getAdminGstAmount());
+        dto.setSellerPayableAmount(product.getSellerPayableAmount());
+        dto.setBocxyDeductionAmount(product.getBocxyDeductionAmount());
         dto.setAdminDiscount(product.getAdminDiscount());
         dto.setAvailableQuantity(product.getAvailableQuantity());
         dto.setTotalQuantity(product.getTotalQuantity());
@@ -70,6 +73,9 @@ public class EcomProductMapper {
         product.setSellerPrice(dto.getSellerPrice());
         product.setPlatformPrice(dto.getPlatformPrice());
         product.setAdminDiscountPrice(dto.getAdminDiscountPrice());
+        product.setAdminGstAmount(dto.getAdminGstAmount());
+        product.setSellerPayableAmount(dto.getSellerPayableAmount());
+        product.setBocxyDeductionAmount(dto.getBocxyDeductionAmount());
         product.setAdminDiscount(dto.getAdminDiscount());
         product.setAvailableQuantity(dto.getAvailableQuantity());
         product.setTotalQuantity(dto.getTotalQuantity());
@@ -109,6 +115,9 @@ public class EcomProductMapper {
         product.setSellerPrice(dto.getSellerPrice());
         product.setPlatformPrice(dto.getPlatformPrice());
         product.setAdminDiscountPrice(dto.getAdminDiscountPrice());
+        product.setAdminGstAmount(dto.getAdminGstAmount());
+        product.setSellerPayableAmount(dto.getSellerPayableAmount());
+        product.setBocxyDeductionAmount(dto.getBocxyDeductionAmount());
         product.setAdminDiscount(dto.getAdminDiscount());
         product.setAvailableQuantity(dto.getAvailableQuantity());
         product.setTotalQuantity(dto.getTotalQuantity());
