@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,4 +100,7 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
             "AND status=:status",
             nativeQuery = true)
     long findPartnerProductCountByMonthAndStatusAndStoreIdAndProjectName(String status,String storeId,String projectName);
+
+    @Query("SELECT p FROM EcomProduct p WHERE p.updatedAt BETWEEN :startOfDay AND :endOfDay")
+    List<EcomProduct> findProductsUpdatedToday(LocalDateTime startOfDay, LocalDateTime endOfDay);
 }

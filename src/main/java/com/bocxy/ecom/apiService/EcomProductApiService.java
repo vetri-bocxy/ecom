@@ -125,4 +125,8 @@ public class EcomProductApiService {
     public ProductCountDTO getAllPartnerProductCountAndMonth(String storeId, String projectName) {
         return productService.getAllPartnerProductCountAndMonth(storeId, projectName);
     }
+
+    public List<EcomProductDTO> getTodayUpdatedProducts() {
+        return productService.getTodayUpdatedProducts().stream().map(productMapper::toDTO).toList();
+    }
 }

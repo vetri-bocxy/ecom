@@ -1,10 +1,7 @@
 package com.bocxy.ecom.controller;
 
 
-import com.bocxy.ecom.DTO.EcomProductDTO;
-import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
-import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
-import com.bocxy.ecom.DTO.ProductCountDTO;
+import com.bocxy.ecom.DTO.*;
 import com.bocxy.ecom.apiService.EcomProductApiService;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
@@ -91,5 +88,10 @@ public class EcomProductController {
     @GetMapping("/getAllPartnerProductCountAndMonth")
     public ResponseEntity<ProductCountDTO> getAllPartnerProductCountAndMonth(@RequestParam String storeId,@RequestParam String projectName) {
         return ResponseEntity.ok(apiService.getAllPartnerProductCountAndMonth(storeId,projectName));
+    }
+
+    @GetMapping("/todayUpdatedForAdmin")
+    public ResponseEntity<List<EcomProductDTO>> getTodayUpdatedProducts(){
+        return ResponseEntity.ok(apiService.getTodayUpdatedProducts());
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -117,5 +119,13 @@ public class EcomProductService {
         dto.setThisMonthRejectedProducts(String.valueOf(repository.findPartnerProductCountByMonthAndStatusAndStoreIdAndProjectName("rejected",storeId,projectName)));
 
         return dto;
+    }
+
+    public List<EcomProduct> getTodayUpdatedProducts() {
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfDay = today.atStartOfDay();
+        LocalDateTime endOfDay = today.atTime(23, 59, 59);
+
+        return repository.findProductsUpdatedToday(startOfDay, endOfDay);
     }
 }
