@@ -75,7 +75,7 @@ public class EcomProductMapper {
         product.setTotalQuantity(dto.getTotalQuantity());
         product.setMrpPrice(dto.getMrpPrice());
         product.setDescription(dto.getDescription());
-        product.setGstPercentage(dto.getGstPercentage());
+        product.setGstPercentage("18");
         product.setDetails(dto.getDetails());
         product.setHowToUse(dto.getHowToUse());
         product.setKeyBenefits(dto.getKeyBenefits());
