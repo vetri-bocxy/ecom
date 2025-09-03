@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DealerRegistrationRepository extends JpaRepository<DealerRegistrationEntity,Long> {
@@ -14,4 +15,6 @@ public interface DealerRegistrationRepository extends JpaRepository<DealerRegist
 
     @Query(value = "SELECT d.gstNumber FROM DealerRegistrationEntity d")
     List<String> findAllGSTNumber();
+
+    Optional<DealerRegistrationEntity> findByEmail(String email);
 }
