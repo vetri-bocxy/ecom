@@ -51,6 +51,9 @@ public class EcomStatusMapper {
         product.setStatus(dto.getStatus());
         product.setPlatformPrice(dto.getPlatformPrice());
         product.setAdminDiscount(dto.getAdminDiscount());
+        product.setAdminGstAmount(dto.getAdminGstAmount());
+        product.setSellerPayableAmount(dto.getSellerPayableAmount());
+        product.setBocxyDeductionAmount(dto.getBocxyDeductionAmount());
         return product;
     }
 

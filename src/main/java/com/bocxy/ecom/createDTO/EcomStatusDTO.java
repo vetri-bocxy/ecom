@@ -17,4 +17,8 @@ public class EcomStatusDTO {
     private String rejectRemarks;
     private BigDecimal platformPrice;
     private int adminDiscount;
+    private BigDecimal adminGstAmount;
+    private BigDecimal sellerPayableAmount;
+    private BigDecimal bocxyDeductionAmount;
+
 }
