@@ -7,6 +7,7 @@ import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,13 +21,16 @@ public class EcomProductController {
         this.apiService = apiService;
     }
 
-    @PostMapping
-    public ResponseEntity<EcomProductDTO> create(@RequestBody EcomProductCreateDTO createDTO) {
-        return ResponseEntity.ok(apiService.create(createDTO));
-    }
+//    @PostMapping
+//    public ResponseEntity<EcomProductDTO> create(@RequestBody EcomProductCreateDTO createDTO) {
+//        return ResponseEntity.ok(apiService.create(createDTO));
+//    }
+
     @PostMapping("/create")
-    public ResponseEntity<EcomProductDTO> create1(@RequestBody EcomProductCreateDTO createDTO) {
-        return ResponseEntity.ok(apiService.create(createDTO));
+    public ResponseEntity<EcomProductDTO> create1(
+            @RequestPart("productDto") EcomProductCreateDTO createDTO,
+            @RequestPart(value = "files", required = false) List<MultipartFile> files) {
+        return ResponseEntity.ok(apiService.create(createDTO,files));
     }
 
     @GetMapping("/{id}")

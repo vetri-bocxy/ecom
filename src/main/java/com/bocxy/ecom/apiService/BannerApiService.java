@@ -2,8 +2,7 @@ package com.bocxy.ecom.apiService;
 
 import com.bocxy.ecom.DTO.BannerUploadResponseDTO;
 import com.bocxy.ecom.model.BannerUploadEntity;
-import com.bocxy.ecom.model.DealerRegistrationEntity;
-import com.bocxy.ecom.repository.BannerUploadMapper;
+import com.bocxy.ecom.mapper.BannerUploadMapper;
 import com.bocxy.ecom.repository.BannerUploadRepository;
 import com.bocxy.ecom.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;

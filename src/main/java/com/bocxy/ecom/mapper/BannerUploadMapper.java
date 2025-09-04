@@ -1,4 +1,4 @@
-package com.bocxy.ecom.repository;
+package com.bocxy.ecom.mapper;
 
 import com.bocxy.ecom.DTO.BannerUploadResponseDTO;
 import com.bocxy.ecom.model.BannerUploadEntity;

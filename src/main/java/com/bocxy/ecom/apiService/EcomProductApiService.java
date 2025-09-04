@@ -8,13 +8,16 @@ import com.bocxy.ecom.DTO.ProductCountDTO;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
+import com.bocxy.ecom.model.FileUploadEntity;
 import com.bocxy.ecom.service.EcomProductService;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,13 +27,15 @@ public class EcomProductApiService {
 
     private final EcomProductService productService;
     private final EcomProductMapper productMapper;
+    private final FileUploadApiService fileUploadApiService;
 
-    public EcomProductApiService(EcomProductService productService, EcomProductMapper productMapper) {
+    public EcomProductApiService(EcomProductService productService, EcomProductMapper productMapper,FileUploadApiService fileUploadApiService) {
         this.productService = productService;
         this.productMapper = productMapper;
+        this.fileUploadApiService=fileUploadApiService;
     }
 
-    public EcomProductDTO create(EcomProductCreateDTO createDTO) {
+    public EcomProductDTO create(EcomProductCreateDTO createDTO,List<MultipartFile> files) {
         if (createDTO.getProductId() != null) {
             if (productService.existsByProductId(createDTO.getProductId())) {
                 throw new RuntimeException("Product with this ID already exists");
@@ -46,6 +51,16 @@ public class EcomProductApiService {
             qtyEntity.setStoreId(createDTO.getStoreId());
         }
         productService.saveQty(qtyEntity);
+
+        if (files != null && !files.isEmpty()) {
+            List<FileUploadEntity> uploadedFiles = new ArrayList<>();
+            for (MultipartFile file : files) {
+                FileUploadEntity uploadedFile =
+                        fileUploadApiService.uploadMultipleProductImages(file, "/product/", saved.getId());
+                uploadedFiles.add(uploadedFile);
+            }
+            // You could store `uploadedFiles` somewhere if needed
+        }
 
         return productMapper.toDTO(saved);
     }
