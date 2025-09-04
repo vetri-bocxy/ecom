@@ -1,5 +1,6 @@
 package com.bocxy.ecom.DTO;
 
+import com.bocxy.ecom.model.User;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -40,4 +41,5 @@ public class EcomProductDTO {
     private String otherInformation;
     private String howToUse;
     private String status;
+    private User user;
 }

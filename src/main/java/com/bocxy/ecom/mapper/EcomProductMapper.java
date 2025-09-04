@@ -51,6 +51,7 @@ public class EcomProductMapper {
         dto.setCreatedAt(product.getCreatedAtIST());
         dto.setUpdatedAt(product.getUpdatedAtIST());
         dto.setStatus(product.getStatus());
+        dto.setUser(product.getUser());
         return dto;
     }
 
