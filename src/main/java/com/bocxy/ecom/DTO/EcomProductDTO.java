@@ -1,10 +1,12 @@
 package com.bocxy.ecom.DTO;
 
+import com.bocxy.ecom.model.FileUploadEntity;
 import com.bocxy.ecom.model.User;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 
 @Data
@@ -42,4 +44,5 @@ public class EcomProductDTO {
     private String howToUse;
     private String status;
     private User user;
+    private List<FileUploadEntity> files;
 }

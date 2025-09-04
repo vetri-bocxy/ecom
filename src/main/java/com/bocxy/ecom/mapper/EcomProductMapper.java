@@ -3,11 +3,15 @@ package com.bocxy.ecom.mapper;
 import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import com.bocxy.ecom.model.EcomProduct;
+import com.bocxy.ecom.model.FileUploadEntity;
 import com.bocxy.ecom.repository.EcomProductRepository;
+import com.bocxy.ecom.repository.FileUploadRepository;
 import com.bocxy.ecom.repository.UserRepository;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class EcomProductMapper {
@@ -16,6 +20,9 @@ public class EcomProductMapper {
     UserRepository userRepository;
     @Autowired
     EcomProductRepository productRepository;
+
+    @Autowired
+    private FileUploadRepository fileUploadRepository;
 
 
     public EcomProductDTO toDTO(EcomProduct product) {
@@ -52,6 +59,9 @@ public class EcomProductMapper {
         dto.setUpdatedAt(product.getUpdatedAtIST());
         dto.setStatus(product.getStatus());
         dto.setUser(product.getUser());
+
+        List<FileUploadEntity> uploadedFiles = fileUploadRepository.findAllByMid(product.getId());
+        dto.setFiles(uploadedFiles);
         return dto;
     }
 
