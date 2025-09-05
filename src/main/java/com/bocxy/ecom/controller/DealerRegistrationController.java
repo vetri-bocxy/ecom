@@ -83,4 +83,8 @@ public class DealerRegistrationController {
         return ResponseEntity.ok(new ResponseDTO(200, "Dealers fetched successfully",result));
     }
 
+    @GetMapping("/getByUsername")
+    public ResponseEntity<ResponseDTO> getByUsername(@RequestParam String username){
+        return ResponseEntity.ok(new ResponseDTO(200, "Dealers fetched successfully", dealerRegistrationApiService.getByUsername(username)));
+    }
 }

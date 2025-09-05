@@ -137,4 +137,8 @@ public class DealerRegistrationService {
     public List<String> getAllGSTNumber() {
         return dealerRegistrationRepository.findAllGSTNumber();
     }
+
+    public DealerRegistrationEntity findByUsername(String username) {
+        return dealerRegistrationRepository.findByEmail(username).orElseThrow(()->new EntityNotFoundException("no data found for this username "+ username));
+    }
 }

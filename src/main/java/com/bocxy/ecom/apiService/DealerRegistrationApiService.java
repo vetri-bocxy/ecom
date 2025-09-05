@@ -53,4 +53,8 @@ public class DealerRegistrationApiService {
     public List<String> getAllGSTNumber() {
         return dealerRegistrationService.getAllGSTNumber();
     }
+
+    public DealerRegistrationResponseDTO getByUsername(String username) {
+        return dealerRegistrationMapper.toResponseDTO(dealerRegistrationService.findByUsername(username));
+    }
 }
