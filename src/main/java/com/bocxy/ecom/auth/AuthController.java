@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/aeAuth")
+@CrossOrigin(origins = "*") // Add this to allow cross-origin requests
 public class AuthController {
 
     @Autowired

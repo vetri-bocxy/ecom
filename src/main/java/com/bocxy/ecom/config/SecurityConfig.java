@@ -1,12 +1,9 @@
 package com.bocxy.ecom.config;
 
 import com.bocxy.ecom.jwt.JwtRequestFilter;
-import com.bocxy.ecom.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -42,14 +39,19 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(
-                "https://partners.bocxy.com",
-                "https://partnersapi.bocxy.com",
-                "http://localhost:4200"
-        ));
+
+        // Allow ANY origin (all origins)
+        config.setAllowedOriginPatterns(List.of("*"));
+
+        // Alternative: If you want to use setAllowedOrigins with wildcard
+        // config.setAllowedOrigins(List.of("*"));
+
         config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS","PATCH"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
+
+        // IMPORTANT: When using wildcard (*) for origins, you cannot allow credentials
+        config.setAllowCredentials(false);
+
         config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -62,24 +64,13 @@ public class SecurityConfig {
         return new CorsFilter(corsConfigurationSource());
     }
 
-        @Bean
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers(
-                                "/v3/api-docs/**",
-                                "/api-docs/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html",
-                                "/swagger-resources/**",
-                                "/webjars/**",
-                                "/api/auth/**",
-                                "/api/aeAuth/login",
-                                "/api/dealerRegister/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll() // Permit ALL requests
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -89,6 +80,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-
 }
