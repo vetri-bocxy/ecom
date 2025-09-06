@@ -29,12 +29,9 @@ public class SecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 
     @Bean
@@ -42,78 +39,73 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Dynamic CORS configuration
-    @Bean
-    public CorsFilter corsFilter() {
-        return new CorsFilter(corsConfigurationSource());
-    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(List.of(
+//                "https://partners.bocxy.com",
+//                "https://partnersapi.bocxy.com",
+//                "http://localhost:4200"
+//        ));
+//        config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS","PATCH"));
+//        config.setAllowedHeaders(List.of("*"));
+//        config.setAllowCredentials(true);
+//        config.setMaxAge(3600L);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return source;
+//    }
+//
+//    @Bean
+//    public CorsFilter corsFilter() {
+//        return new CorsFilter(corsConfigurationSource());
+//    }
 
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration baseConfig = new CorsConfiguration();
-        baseConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        baseConfig.setAllowedHeaders(List.of("Origin", "Content-Type", "Accept", "Authorization"));
-        baseConfig.setAllowCredentials(true);
-        baseConfig.setMaxAge(3600L);
-
-        // Production allowed origins list (currently empty)
-        List<String> allowedOrigins = List.of(
-                "https://partners.bocxy.com"
-        );
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource() {
-            @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                String origin = request.getHeader("Origin");
-
-                // Allow localhost for development
-                if (origin != null && origin.startsWith("http://localhost")) {
-                    CorsConfiguration localhostConfig = new CorsConfiguration(baseConfig);
-                    localhostConfig.setAllowedOrigins(List.of(origin));
-                    return localhostConfig;
-                }
-
-                // Allow production origins
-                if (origin != null && allowedOrigins.contains(origin)) {
-                    CorsConfiguration prodConfig = new CorsConfiguration(baseConfig);
-                    prodConfig.setAllowedOrigins(List.of(origin));
-                    return prodConfig;
-                }
-
-                return null; // block unknown origins
-            }
-        };
-
-        source.registerCorsConfiguration("/**", baseConfig); // fallback
-        return source;
-    }
-
+    //    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//                .cors().and()
+//                .csrf().disable()
+//                .authorizeHttpRequests(auth -> auth
+//                        .antMatchers(
+//                                "/v3/api-docs/**",
+//                                "/api-docs/**",
+//                                "/swagger-ui/**",
+//                                "/swagger-ui.html",
+//                                "/swagger-resources/**",
+//                                "/webjars/**",
+//                                "/api/auth/**",
+//                                "/api/aeAuth/login",
+//                                "/api/dealerRegister/**"
+//                        ).permitAll()
+//                        .anyRequest().authenticated()
+//                )
+//                .sessionManagement(session -> session
+//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                );
+//
+//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//        return http.build();
+//    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .csrf().disable()
-                .authorizeRequests()
-                .antMatchers(
-                        // Swagger endpoints
-                        "/v3/api-docs/**",
-                        "/api-docs/**",
-                        "/swagger-ui/**",
-                        "/swagger-ui.html",
-                        "/swagger-resources/**",
-                        "/webjars/**",
-                        // Public API endpoints
-                        "/api/auth/**",
-                        "/api/aeAuth/login",
-                        "/api/dealerRegister/**",
-                        "/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll() // 🔓 Allow ALL APIs
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
 
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        // Optional: You can remove jwtRequestFilter if no security is needed
+        // http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
+
 }

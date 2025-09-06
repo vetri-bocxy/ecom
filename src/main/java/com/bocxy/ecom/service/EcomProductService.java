@@ -128,4 +128,8 @@ public class EcomProductService {
 
         return repository.findProductsUpdatedToday(startOfDay, endOfDay);
     }
+
+    public List<EcomProduct> getByStatus(String status) {
+        return repository.findByStatus(status);
+    }
 }

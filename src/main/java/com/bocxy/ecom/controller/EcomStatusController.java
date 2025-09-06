@@ -1,5 +1,6 @@
 package com.bocxy.ecom.controller;
 
+import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
 import com.bocxy.ecom.createDTO.EcomStatusDTO;
 import com.bocxy.ecom.model.EcomProduct;
@@ -30,7 +31,7 @@ public class EcomStatusController {
     }
 
     @GetMapping("/approved")
-    public ResponseEntity<List<EcomProduct>> getApproved() {
+    public ResponseEntity<List<EcomProductDTO>> getApproved() {
         return ResponseEntity.ok(ecomStatusApiService.getApproved());
     }
 

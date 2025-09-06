@@ -19,13 +19,13 @@ public class FileUploadService {
     @Autowired
     private FileUploadRepository fileUploadRepository;
 
-    //    private static final String BASE_URL = "https://aestheticapi.bocxy.com";
-//    private static final String UPLOAD_DIR = System.getProperty("os.name").toLowerCase().contains("win")
-//            ? "C:/uploads/ecommerce"
-//            : "/var/uploads/ecommerce";
-    private static final String BASE_URL = "http://localhost:8089";
+    private static final String BASE_URL = "https://partnersapi.bocxy.com";
+    private static final String UPLOAD_DIR = System.getProperty("os.name").toLowerCase().contains("win")
+            ? "C:/uploads/ecommerce"
+            : "/var/uploads/ecommerce";
+//    private static final String BASE_URL = "http://localhost:8005";
 
-    private static final String UPLOAD_DIR = "C:/uploads/ecommerce";
+//    private static final String UPLOAD_DIR = "C:/uploads/ecommerce";
 
     private static final String SEND_URL = "/uploads/ecommerce";
 
