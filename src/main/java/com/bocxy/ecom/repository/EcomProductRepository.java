@@ -103,4 +103,7 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
 
     @Query("SELECT p FROM EcomProduct p WHERE p.updatedAt BETWEEN :startOfDay AND :endOfDay")
     List<EcomProduct> findProductsUpdatedToday(LocalDateTime startOfDay, LocalDateTime endOfDay);
+
+    List<EcomProduct> findByUpdatedAtAfterAndStatus(LocalDateTime dateTime,String status);
+
 }

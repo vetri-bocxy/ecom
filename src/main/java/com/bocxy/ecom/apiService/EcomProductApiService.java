@@ -1,10 +1,7 @@
 package com.bocxy.ecom.apiService;
 
 
-import com.bocxy.ecom.DTO.EcomProductDTO;
-import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
-import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
-import com.bocxy.ecom.DTO.ProductCountDTO;
+import com.bocxy.ecom.DTO.*;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
@@ -17,8 +14,10 @@ import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -143,5 +142,9 @@ public class EcomProductApiService {
 
     public List<EcomProductDTO> getTodayUpdatedProducts() {
         return productService.getTodayUpdatedProducts().stream().map(productMapper::toDTO).toList();
+    }
+
+    public DealerProductNotificationDTO getLatestDealerAndProductForNotification(LocalDateTime dateTime) {
+        return productService.getLatestDealerAndProductForNotification(dateTime);
     }
 }
