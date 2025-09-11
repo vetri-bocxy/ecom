@@ -1,10 +1,7 @@
 package com.bocxy.ecom.apiService;
 
 
-import com.bocxy.ecom.DTO.EcomProductDTO;
-import com.bocxy.ecom.DTO.EcomProductStatusWiseDto;
-import com.bocxy.ecom.DTO.ProductBrandsAndCategoriesDTO;
-import com.bocxy.ecom.DTO.ProductCountDTO;
+import com.bocxy.ecom.DTO.*;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
@@ -17,8 +14,11 @@ import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -190,4 +190,29 @@ public class EcomProductApiService {
         return result;
     }
 
+    public DealerProductNotificationDTO getLatestDealerAndProductForNotification(LocalDateTime dateTime) {
+        return productService.getLatestDealerAndProductForNotification(dateTime);
+    }
+
+    public Map<String,List<EcomProductDTO>> getLatestUpdatedProductForNotificationDealer(LocalDateTime dateTime,int userId) {
+        Map<String,List<EcomProduct>> data=productService.getLatestUpdatedProductForNotificationDealer(dateTime,userId);
+        Map<String,List<EcomProductDTO>> returnData=new LinkedHashMap<>();
+
+        for(Map.Entry<String,List<EcomProduct>> entry:data.entrySet()){
+            List<EcomProductDTO> dtoList=entry.getValue().stream().map(productMapper::toDTO).toList();
+            returnData.put(entry.getKey(),dtoList);
+        }
+        return returnData;
+    }
+
+    public Map<String,List<EcomProductDTO>> getLatestUpdatedProductForNotificationPartner(LocalDateTime dateTime,String storeId,String projectName) {
+        Map<String,List<EcomProduct>> data=productService.getLatestUpdatedProductForNotificationPartner(dateTime,storeId,projectName);
+        Map<String,List<EcomProductDTO>> returnData=new LinkedHashMap<>();
+
+        for(Map.Entry<String,List<EcomProduct>> entry:data.entrySet()){
+            List<EcomProductDTO> dtoList=entry.getValue().stream().map(productMapper::toDTO).toList();
+            returnData.put(entry.getKey(),dtoList);
+        }
+        return returnData;
+    }
 }

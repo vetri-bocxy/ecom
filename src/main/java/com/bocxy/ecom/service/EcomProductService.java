@@ -1,10 +1,12 @@
 package com.bocxy.ecom.service;
 
+import com.bocxy.ecom.DTO.DealerProductNotificationDTO;
 import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.DTO.ProductCountDTO;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
+import com.bocxy.ecom.repository.DealerRegistrationRepository;
 import com.bocxy.ecom.repository.EcomProductQuantityRepository;
 import com.bocxy.ecom.repository.EcomProductRepository;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
@@ -14,15 +16,16 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Transactional
 @Service
 public class EcomProductService {
     @Autowired
     EcomProductMapper productMapper;
+
+    @Autowired
+    DealerRegistrationRepository dealerRegistrationRepository;
 
     private final EcomProductRepository repository;
 
@@ -131,5 +134,26 @@ public class EcomProductService {
 
     public List<EcomProduct> getByStatus(String status) {
         return repository.findByStatus(status);
+    }
+
+    public DealerProductNotificationDTO getLatestDealerAndProductForNotification(LocalDateTime dateTime) {
+        DealerProductNotificationDTO dto=new DealerProductNotificationDTO();
+        dto.setProducts(repository.findByUpdatedAtAfterAndStatus(dateTime,"pending"));
+        dto.setDealers(dealerRegistrationRepository.findByUpdatedAtAfterAndStatus(dateTime,"PENDING"));
+        return dto;
+    }
+
+    public Map<String,List<EcomProduct>> getLatestUpdatedProductForNotificationDealer(LocalDateTime dateTime,int userId) {
+        Map<String,List<EcomProduct>> data=new LinkedHashMap<>();
+        data.put("approved",repository.findByUpdatedAtAfterAndStatusAndUserId(dateTime,"approved",userId));
+        data.put("rejected",repository.findByUpdatedAtAfterAndStatusAndUserId(dateTime,"rejected",userId));
+        return data;
+    }
+
+    public Map<String,List<EcomProduct>> getLatestUpdatedProductForNotificationPartner(LocalDateTime dateTime,String storeId,String projectName) {
+        Map<String,List<EcomProduct>> data=new LinkedHashMap<>();
+        data.put("approved",repository.findByUpdatedAtAfterAndStatusAndStoreIdAndProjectName(dateTime,"approved",storeId,projectName));
+        data.put("pending",repository.findByUpdatedAtAfterAndStatusAndStoreIdAndProjectName(dateTime,"pending",storeId,projectName));
+        return data;
     }
 }

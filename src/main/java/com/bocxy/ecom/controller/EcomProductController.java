@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -112,4 +114,35 @@ public class EcomProductController {
     public ResponseEntity<List<EcomProductDTO>> getTodayUpdatedProducts(){
         return ResponseEntity.ok(apiService.getTodayUpdatedProducts());
     }
+
+    @GetMapping("/getLatestDealerAndProductForNotification")
+    public ResponseEntity<ResponseDTO> getLatestDealerAndProductForNotification(@RequestParam String dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        LocalDateTime parsed = LocalDateTime.parse(dateTime, formatter);
+
+        return ResponseEntity.ok(
+                new ResponseDTO(200, "Success", apiService.getLatestDealerAndProductForNotification(parsed))
+        );
+    }
+
+    @GetMapping("/getLatestUpdatedProductForNotificationDealer")
+    public ResponseEntity<ResponseDTO> getLatestUpdatedProductForNotificationDealer(@RequestParam String dateTime,@RequestParam int userId) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        LocalDateTime parsed = LocalDateTime.parse(dateTime, formatter);
+
+        return ResponseEntity.ok(
+                new ResponseDTO(200, "Success", apiService.getLatestUpdatedProductForNotificationDealer(parsed,userId))
+        );
+    }
+
+    @GetMapping("/getLatestUpdatedProductForNotificationPartner")
+    public ResponseEntity<ResponseDTO> getLatestUpdatedProductForNotificationPartner(@RequestParam String dateTime,@RequestParam String storeId,@RequestParam String projectName) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        LocalDateTime parsed = LocalDateTime.parse(dateTime, formatter);
+
+        return ResponseEntity.ok(
+                new ResponseDTO(200, "Success", apiService.getLatestUpdatedProductForNotificationPartner(parsed,storeId,projectName))
+        );
+    }
+
 }
