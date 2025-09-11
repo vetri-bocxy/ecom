@@ -106,4 +106,12 @@ public interface EcomProductRepository extends JpaRepository<EcomProduct,Long> {
 
     List<EcomProduct> findByUpdatedAtAfterAndStatus(LocalDateTime dateTime,String status);
 
+    List<EcomProduct> findByUpdatedAtAfterAndStatusAndStoreIdAndProjectName(LocalDateTime dateTime, String approved, String storeId, String projectName);
+
+    @Query(value = """
+            SELECT * FROM ecom_product 
+            WHERE updated_at > :dateTime 
+            AND status=:status 
+            AND user_id=:userId""",nativeQuery = true)
+    List<EcomProduct> findByUpdatedAtAfterAndStatusAndUserId(LocalDateTime dateTime, String status, int userId);
 }

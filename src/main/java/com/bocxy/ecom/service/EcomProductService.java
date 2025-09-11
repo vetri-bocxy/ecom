@@ -142,4 +142,18 @@ public class EcomProductService {
         dto.setDealers(dealerRegistrationRepository.findByUpdatedAtAfterAndStatus(dateTime,"PENDING"));
         return dto;
     }
+
+    public Map<String,List<EcomProduct>> getLatestUpdatedProductForNotificationDealer(LocalDateTime dateTime,int userId) {
+        Map<String,List<EcomProduct>> data=new LinkedHashMap<>();
+        data.put("approved",repository.findByUpdatedAtAfterAndStatusAndUserId(dateTime,"approved",userId));
+        data.put("rejected",repository.findByUpdatedAtAfterAndStatusAndUserId(dateTime,"rejected",userId));
+        return data;
+    }
+
+    public Map<String,List<EcomProduct>> getLatestUpdatedProductForNotificationPartner(LocalDateTime dateTime,String storeId,String projectName) {
+        Map<String,List<EcomProduct>> data=new LinkedHashMap<>();
+        data.put("approved",repository.findByUpdatedAtAfterAndStatusAndStoreIdAndProjectName(dateTime,"approved",storeId,projectName));
+        data.put("pending",repository.findByUpdatedAtAfterAndStatusAndStoreIdAndProjectName(dateTime,"pending",storeId,projectName));
+        return data;
+    }
 }

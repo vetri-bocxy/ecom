@@ -112,4 +112,24 @@ public class EcomProductController {
         );
     }
 
+    @GetMapping("/getLatestUpdatedProductForNotificationDealer")
+    public ResponseEntity<ResponseDTO> getLatestUpdatedProductForNotificationDealer(@RequestParam String dateTime,@RequestParam int userId) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        LocalDateTime parsed = LocalDateTime.parse(dateTime, formatter);
+
+        return ResponseEntity.ok(
+                new ResponseDTO(200, "Success", apiService.getLatestUpdatedProductForNotificationDealer(parsed,userId))
+        );
+    }
+
+    @GetMapping("/getLatestUpdatedProductForNotificationPartner")
+    public ResponseEntity<ResponseDTO> getLatestUpdatedProductForNotificationPartner(@RequestParam String dateTime,@RequestParam String storeId,@RequestParam String projectName) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        LocalDateTime parsed = LocalDateTime.parse(dateTime, formatter);
+
+        return ResponseEntity.ok(
+                new ResponseDTO(200, "Success", apiService.getLatestUpdatedProductForNotificationPartner(parsed,storeId,projectName))
+        );
+    }
+
 }
