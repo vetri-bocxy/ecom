@@ -144,4 +144,50 @@ public class EcomProductApiService {
     public List<EcomProductDTO> getTodayUpdatedProducts() {
         return productService.getTodayUpdatedProducts().stream().map(productMapper::toDTO).toList();
     }
+
+    public List<EcomProductDTO> createList(List<EcomProductCreateDTO> createDTOs, List<MultipartFile> images) {
+        List<EcomProductDTO> result = new ArrayList<>();
+
+        for (int i = 0; i < createDTOs.size(); i++) {
+            EcomProductCreateDTO createDTO = createDTOs.get(i);
+
+            // 1. Check for duplicate product ID
+            if (createDTO.getProductId() != null) {
+                if (productService.existsByProductId(createDTO.getProductId())) {
+                    throw new RuntimeException("Product with ID " + createDTO.getProductId() + " already exists");
+                }
+            }
+
+            // 2. Save product entity
+            EcomProduct saved = productService.save(productMapper.toEntity(createDTO));
+
+            // 3. Save quantity info
+            EcomProductQuantity qtyEntity = new EcomProductQuantity();
+            qtyEntity.setQuantity(createDTO.getTotalQuantity());
+            qtyEntity.setAvailable(createDTO.getTotalQuantity());
+            qtyEntity.setEcomProduct(saved);
+            if (createDTO.getStoreId() != null && !createDTO.getStoreId().isEmpty()) {
+                qtyEntity.setStoreId(createDTO.getStoreId());
+            }
+            productService.saveQty(qtyEntity);
+
+            // 4. Upload files (if provided)
+            if (images != null && !images.isEmpty() && createDTO.getImageIndexes() != null) {
+                for (Integer idx : createDTO.getImageIndexes()) {
+                    if (idx >= 0 && idx < images.size()) {
+                        MultipartFile file = images.get(idx);
+                        fileUploadApiService.uploadMultipleProductImages(file, "/product/", saved.getId());
+                    } else {
+                        throw new RuntimeException("Invalid image index: " + idx + " for product " + saved.getId());
+                    }
+                }
+            }
+
+            // 5. Convert to DTO and add to result
+            result.add(productMapper.toDTO(saved));
+        }
+
+        return result;
+    }
+
 }

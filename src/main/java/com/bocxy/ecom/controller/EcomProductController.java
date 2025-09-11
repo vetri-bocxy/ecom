@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,18 @@ public class EcomProductController {
             @RequestPart(value = "files", required = false) List<MultipartFile> files) {
         return ResponseEntity.ok(apiService.create(createDTO,files));
     }
+
+    @PostMapping("/create-list")
+    public ResponseEntity<List<EcomProductDTO>> createProducts(
+            @RequestPart("productDto") List<EcomProductCreateDTO> createDTOs,
+            @RequestPart(value = "images", required = false) MultipartFile[] images) {
+
+        // Now images array contains ALL images in order (flattened)
+        List<EcomProductDTO> savedProducts = apiService.createList(createDTOs, Arrays.asList(images));
+
+        return ResponseEntity.ok(savedProducts);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<EcomProductDTO> getById(@PathVariable Long id) {

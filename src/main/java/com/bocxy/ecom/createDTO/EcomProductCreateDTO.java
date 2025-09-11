@@ -4,6 +4,7 @@ package com.bocxy.ecom.createDTO;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class EcomProductCreateDTO {
@@ -40,4 +41,6 @@ public class EcomProductCreateDTO {
     private String keyBenefits;
     private String otherInformation;
     private Long userId;
+    private List<Integer> imageIndexes;
+
 }
