@@ -1,6 +1,5 @@
 package com.bocxy.ecom.repository;
 
-import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.model.EcomProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
