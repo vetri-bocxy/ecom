@@ -25,11 +25,6 @@ public class EcomProductController {
         this.apiService = apiService;
     }
 
-//    @PostMapping
-//    public ResponseEntity<EcomProductDTO> create(@RequestBody EcomProductCreateDTO createDTO) {
-//        return ResponseEntity.ok(apiService.create(createDTO));
-//    }
-
     @PostMapping("/create")
     public ResponseEntity<EcomProductDTO> create1(
             @RequestPart("productDto") EcomProductCreateDTO createDTO,
@@ -37,20 +32,9 @@ public class EcomProductController {
         return ResponseEntity.ok(apiService.create(createDTO,files));
     }
 
-    @PostMapping("/create-list")
-    public ResponseEntity<List<EcomProductDTO>> createProducts(
-            @RequestPart("productDto") List<EcomProductCreateDTO> createDTOs,
-            @RequestPart(value = "images", required = false) MultipartFile[] images) {
-
-        // Now images array contains ALL images in order (flattened)
-        List<EcomProductDTO> savedProducts = apiService.createList(createDTOs, Arrays.asList(images));
-
-        return ResponseEntity.ok(savedProducts);
-    }
-
     @PostMapping("/create-multipleProduct")
     public ResponseEntity<List<EcomProductDTO>> createListOfProducts(
-            @RequestBody List<MultiProductCreateDTO> createDTOS) {
+            @RequestBody List<EcomProductCreateDTO> createDTOS) {
         List<EcomProductDTO> savedProducts = apiService.createMultipleProduct(createDTOS);
         return ResponseEntity.ok(savedProducts);
     }

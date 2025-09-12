@@ -1,6 +1,7 @@
 package com.bocxy.ecom.mapper;
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
+import com.bocxy.ecom.apiService.FileUploadApiService;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
 import com.bocxy.ecom.createDTO.MultiProductCreateDTO;
 import com.bocxy.ecom.model.EcomProduct;
@@ -8,6 +9,7 @@ import com.bocxy.ecom.model.FileUploadEntity;
 import com.bocxy.ecom.repository.EcomProductRepository;
 import com.bocxy.ecom.repository.FileUploadRepository;
 import com.bocxy.ecom.repository.UserRepository;
+import com.bocxy.ecom.service.FileUploadService;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,12 @@ public class EcomProductMapper {
     UserRepository userRepository;
     @Autowired
     EcomProductRepository productRepository;
+
+    @Autowired
+    FileUploadService fileUploadService;
+
+    @Autowired
+    FileUploadApiService fileUploadApiService;
 
     @Autowired
     private FileUploadRepository fileUploadRepository;
@@ -103,6 +111,11 @@ public class EcomProductMapper {
         product.setProductImageUrl(dto.getProductImageUrl());
         product.setStoreId(dto.getStoreId());
         product.setStatus("pending");
+        if(dto.getImg1()!=null){
+            String path= fileUploadApiService.uploadImages(dto.getImg1(), "/product/");
+            product.setImg1(path);
+        }
+
 
         // Only fetch and set user if userId is provided
         if (dto.getUserId() != null) {

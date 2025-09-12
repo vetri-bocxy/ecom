@@ -73,6 +73,8 @@ public class EcomProduct {
     private String keyBenefits;
     @Column(name="other_information")
     private String otherInformation;
+    private String img1;
+    private String img2;
     public ZonedDateTime getCreatedAtIST() {
         return createdAt.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("Asia/Kolkata"));
     }

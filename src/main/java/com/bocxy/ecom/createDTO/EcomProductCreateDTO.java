@@ -2,6 +2,7 @@ package com.bocxy.ecom.createDTO;
 
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -41,6 +42,6 @@ public class EcomProductCreateDTO {
     private String keyBenefits;
     private String otherInformation;
     private Long userId;
-    private List<Integer> imageIndexes;
+    private MultipartFile img1;
 
 }

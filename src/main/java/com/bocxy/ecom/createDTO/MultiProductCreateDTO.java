@@ -42,8 +42,6 @@ public class MultiProductCreateDTO {
     private String keyBenefits;
     private String otherInformation;
     private Long userId;
+    private MultipartFile img1;
 
-//    private MultipartFile productImage;
-    private List<MultipartFile> productImage;
-//    private MultipartFile documentationFile;
 }

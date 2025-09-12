@@ -15,4 +15,8 @@ public class FileUploadApiService {
     public FileUploadEntity uploadMultipleProductImages(MultipartFile file, String path, Long id) {
         return fileUploadService.uploadImages(file,path,id);
     }
+
+    public String uploadImages(MultipartFile img1, String path) {
+        return fileUploadService.uploadImages1(img1,path);
+    }
 }

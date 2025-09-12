@@ -78,4 +78,35 @@ public class FileUploadService {
             throw new RuntimeException("Failed to upload the file. Please try again.", e);
         }
     }
+
+    public String uploadImages1(MultipartFile file, String path) {
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("File is empty. Please upload a valid file.");
+        }
+        try {
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+            String uuid = UUID.randomUUID().toString();
+            String extension = getFileExtension(file.getOriginalFilename());
+            String storedFileName = timestamp + "_" + uuid + extension;
+
+            String formattedPath = path.startsWith("/") ? path : "/" + path;
+            if (!formattedPath.endsWith("/")) {
+                formattedPath += "/";
+            }
+
+            File uploadDir = new File(UPLOAD_DIR + formattedPath);
+            if (!uploadDir.exists() && !uploadDir.mkdirs()) {
+                throw new IOException("Failed to create upload directory: " + uploadDir.getAbsolutePath());
+            }
+
+            File destinationFile = new File(uploadDir, storedFileName);
+            file.transferTo(destinationFile);
+
+            String fileUrl = BASE_URL + SEND_URL + formattedPath + storedFileName;
+
+           return fileUrl;
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload the file. Please try again.", e);
+        }
+    }
 }
