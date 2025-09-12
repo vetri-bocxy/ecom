@@ -3,6 +3,7 @@ package com.bocxy.ecom.controller;
 import com.bocxy.ecom.DTO.ResponseDTO;
 import com.bocxy.ecom.apiService.BannerCatalogPriceApiService;
 import com.bocxy.ecom.createDTO.BannerCatalogPriceCreateDTO;
+import com.bocxy.ecom.updateDTO.BannerCatalogPriceUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,12 @@ public class BannerCatalogPriceController {
     @GetMapping("/getAll")
     public ResponseEntity<ResponseDTO> getAll(){
         return ResponseEntity.ok(new ResponseDTO(200,"Success",bcpApiService.getAll()));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ResponseDTO> update(@PathVariable Long id, @RequestBody BannerCatalogPriceUpdateDTO dto){
+        dto.setId(id);
+        return ResponseEntity.ok(new ResponseDTO(200,"Success",bcpApiService.update(dto)));
     }
 
     @DeleteMapping("/delete/{id}")

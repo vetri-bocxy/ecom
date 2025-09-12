@@ -42,9 +42,9 @@ public class BannerCatalogPriceMapper {
         return entity;
     }
 
-    public BannerCatalogPrice toEntity(Long id,BannerCatalogPriceUpdateDTO dto){
-        BannerCatalogPrice entity=bannerCatalogPriceRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Banner Catalog is not found for this id "+id));
+    public BannerCatalogPrice toEntity(BannerCatalogPriceUpdateDTO dto){
+        BannerCatalogPrice entity=bannerCatalogPriceRepository.findById(dto.getId())
+                .orElseThrow(()->new RuntimeException("Banner Catalog is not found for this id "+dto.getId()));
 
         entity.setBannerTypeHomepage(dto.getBannerTypeHomepage());
         entity.setBannerTypeCategory(dto.getBannerTypeCategory());

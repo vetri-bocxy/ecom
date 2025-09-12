@@ -4,6 +4,7 @@ import com.bocxy.ecom.DTO.BannerCatalogPriceDTO;
 import com.bocxy.ecom.createDTO.BannerCatalogPriceCreateDTO;
 import com.bocxy.ecom.mapper.BannerCatalogPriceMapper;
 import com.bocxy.ecom.service.BannerCatalogPriceService;
+import com.bocxy.ecom.updateDTO.BannerCatalogPriceUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,9 @@ public class BannerCatalogPriceApiService {
 
     public BannerCatalogPriceDTO getByUserId(Long id) {
         return bcpService.getByUserId(id);
+    }
+
+    public String update(BannerCatalogPriceUpdateDTO dto) {
+        return bcpService.update(bcpMapper.toEntity(dto));
     }
 }

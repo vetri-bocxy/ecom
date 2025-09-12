@@ -39,4 +39,9 @@ public class BannerCatalogPriceService {
     public BannerCatalogPriceDTO getByUserId(Long id) {
         return bcpMapper.toDTO(bcpRepository.findByCreatedById(id));
     }
+
+    public String update(BannerCatalogPrice entity) {
+        bcpRepository.save(entity);
+        return "Banner Catalog Updated";
+    }
 }
