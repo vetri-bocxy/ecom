@@ -2,6 +2,7 @@ package com.bocxy.ecom.apiService;
 
 
 import com.bocxy.ecom.DTO.*;
+import com.bocxy.ecom.createDTO.MultiProductCreateDTO;
 import com.bocxy.ecom.mapper.EcomProductMapper;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.EcomProductQuantity;
@@ -214,5 +215,48 @@ public class EcomProductApiService {
             returnData.put(entry.getKey(),dtoList);
         }
         return returnData;
+    }
+
+    public List<EcomProductDTO> createMultipleProduct(List<MultiProductCreateDTO> createDTOS) {
+        List<EcomProductDTO> result = new ArrayList<>();
+
+        for (MultiProductCreateDTO createDTO : createDTOS) {
+
+            if (createDTO.getProductId() != null) {
+                if (productService.existsByProductId(createDTO.getProductId())) {
+                    throw new RuntimeException("Product with ID " + createDTO.getProductId() + " already exists");
+                }
+            }
+
+            EcomProduct saved = productService.save(productMapper.toEntity(createDTO));
+
+            EcomProductQuantity qtyEntity = new EcomProductQuantity();
+            qtyEntity.setQuantity(createDTO.getTotalQuantity());
+            qtyEntity.setAvailable(createDTO.getTotalQuantity());
+            qtyEntity.setEcomProduct(saved);
+            if (createDTO.getStoreId() != null && !createDTO.getStoreId().isEmpty()) {
+                qtyEntity.setStoreId(createDTO.getStoreId());
+            }
+            productService.saveQty(qtyEntity);
+
+//            if (createDTO.getProductImage() != null && !createDTO.getProductImage().isEmpty()) {
+//                fileUploadApiService.uploadMultipleProductImages(createDTO.getProductImage(), "/product/", saved.getId());
+//            }
+
+            if (createDTO.getProductImage() != null && !createDTO.getProductImage().isEmpty()) {
+                for (MultipartFile file : createDTO.getProductImage()) {
+                    fileUploadApiService.uploadMultipleProductImages(file, "/product/", saved.getId());
+                }
+            }
+
+//            if (createDTO.getDocumentationFile() != null && !createDTO.getDocumentationFile().isEmpty()) {
+//                fileUploadApiService.uploadMultipleProductImages(createDTO.getDocumentationFile(), "/product/docs/", saved.getId());
+//            }
+
+            // 5. Convert to DTO and add to result
+            result.add(productMapper.toDTO(saved));
+        }
+
+        return result;
     }
 }

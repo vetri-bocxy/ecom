@@ -2,6 +2,7 @@ package com.bocxy.ecom.mapper;
 
 import com.bocxy.ecom.DTO.EcomProductDTO;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
+import com.bocxy.ecom.createDTO.MultiProductCreateDTO;
 import com.bocxy.ecom.model.EcomProduct;
 import com.bocxy.ecom.model.FileUploadEntity;
 import com.bocxy.ecom.repository.EcomProductRepository;
@@ -111,6 +112,54 @@ public class EcomProductMapper {
 
         return product;
     }
+
+    public EcomProduct toEntity(MultiProductCreateDTO dto) {
+
+        EcomProduct product = new EcomProduct();
+
+        // Set productId if present
+        if (dto.getProductId() != null) {
+            product.setProductId(dto.getProductId());
+        }
+
+        // Map all fields
+        product.setProjectName(dto.getProjectName());
+        product.setProductName(dto.getProductName());
+        product.setProductCategory(dto.getProductCategory());
+        product.setProductType(dto.getProductType());
+        product.setProductFormulation(dto.getProductFormulation());
+        product.setDiscountPrice(dto.getDiscountPrice());
+        product.setSellerPrice(dto.getSellerPrice());
+        product.setPlatformPrice(dto.getPlatformPrice());
+        product.setAdminDiscountPrice(dto.getAdminDiscountPrice());
+        product.setAdminGstAmount(dto.getAdminGstAmount());
+        product.setSellerPayableAmount(dto.getSellerPayableAmount());
+        product.setBocxyDeductionAmount(dto.getBocxyDeductionAmount());
+        product.setAdminDiscount(dto.getAdminDiscount());
+        product.setAvailableQuantity(dto.getAvailableQuantity());
+        product.setTotalQuantity(dto.getTotalQuantity());
+        product.setMrpPrice(dto.getMrpPrice());
+        product.setDescription(dto.getDescription());
+        product.setGstPercentage("18");
+        product.setDetails(dto.getDetails());
+        product.setHowToUse(dto.getHowToUse());
+        product.setKeyBenefits(dto.getKeyBenefits());
+        product.setOtherInformation(dto.getOtherInformation());
+        product.setGender(dto.getGender());
+        product.setProductBrand(dto.getProductBrand());
+        product.setProductImageUrl(dto.getProductImageUrl());
+        product.setStoreId(dto.getStoreId());
+        product.setStatus("pending");
+
+        // Only fetch and set user if userId is provided
+        if (dto.getUserId() != null) {
+            userRepository.findById(dto.getUserId())
+                    .ifPresent(product::setUser);
+        }
+
+        return product;
+    }
+
 
     public EcomProduct toEntity(EcomProductUpdateDTO dto) {
         EcomProduct product=productRepository.findById(dto.getId())

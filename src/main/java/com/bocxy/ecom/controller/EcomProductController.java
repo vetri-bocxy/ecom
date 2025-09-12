@@ -4,6 +4,7 @@ package com.bocxy.ecom.controller;
 import com.bocxy.ecom.DTO.*;
 import com.bocxy.ecom.apiService.EcomProductApiService;
 import com.bocxy.ecom.createDTO.EcomProductCreateDTO;
+import com.bocxy.ecom.createDTO.MultiProductCreateDTO;
 import com.bocxy.ecom.updateDTO.EcomProductUpdateDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,13 @@ public class EcomProductController {
         // Now images array contains ALL images in order (flattened)
         List<EcomProductDTO> savedProducts = apiService.createList(createDTOs, Arrays.asList(images));
 
+        return ResponseEntity.ok(savedProducts);
+    }
+
+    @PostMapping("/create-multipleProduct")
+    public ResponseEntity<List<EcomProductDTO>> createListOfProducts(
+            @RequestBody List<MultiProductCreateDTO> createDTOS) {
+        List<EcomProductDTO> savedProducts = apiService.createMultipleProduct(createDTOS);
         return ResponseEntity.ok(savedProducts);
     }
 
